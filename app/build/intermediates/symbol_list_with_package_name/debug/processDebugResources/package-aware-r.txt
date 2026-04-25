@@ -3029,6 +3029,12 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable img_character_caocao
+drawable img_character_guanyu
+drawable img_character_lubu
+drawable img_character_zhouyu
+drawable img_character_zhugeliang
+drawable img_enemy_generic
 drawable indeterminate_static
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3236,6 +3242,7 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
+id combatArea
 id compress
 id confirm_button
 id constraint
@@ -3346,6 +3353,8 @@ id inward
 id is_pooling_container_tag
 id italic
 id item_touch_helper_previous_elevation
+id ivEnemyImage
+id ivPlayerImage
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3629,6 +3638,7 @@ id tvSkillPreview
 id tvStatus
 id tvTitle
 id tvTreeLegend
+id tvVs
 id unchecked
 id uniform
 id unlabeled

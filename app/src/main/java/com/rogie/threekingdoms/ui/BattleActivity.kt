@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rogie.threekingdoms.R
 import com.rogie.threekingdoms.game.GameSession
+import com.rogie.threekingdoms.meta.CharacterId
 import com.rogie.threekingdoms.meta.CharacterLibrary
 import com.rogie.threekingdoms.meta.MetaProgressionManager
 
@@ -30,6 +31,8 @@ class BattleActivity : AppCompatActivity() {
     private lateinit var tvStatus: TextView
     private lateinit var llPlayerHearts: LinearLayout
     private lateinit var llEnemyHearts: LinearLayout
+    private lateinit var ivPlayerImage: ImageView
+    private lateinit var ivEnemyImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,7 @@ class BattleActivity : AppCompatActivity() {
         }
 
         viewModel.setupBattle()
+        setVisuals()
         refreshStats()
     }
 
@@ -60,6 +64,30 @@ class BattleActivity : AppCompatActivity() {
         tvStatus = findViewById(R.id.tvStatus)
         llPlayerHearts = findViewById(R.id.llPlayerHearts)
         llEnemyHearts = findViewById(R.id.llEnemyHearts)
+        ivPlayerImage = findViewById(R.id.ivPlayerImage)
+        ivEnemyImage = findViewById(R.id.ivEnemyImage)
+    }
+
+    private fun setVisuals() {
+        val playerRes = when (GameSession.selectedCharacter) {
+            CharacterId.GUAN_YU -> R.drawable.img_character_guanyu
+            CharacterId.ZHUGE_LIANG -> R.drawable.img_character_zhugeliang
+            CharacterId.CAO_CAO -> R.drawable.img_character_caocao
+            CharacterId.ZHOU_YU -> R.drawable.img_character_zhouyu
+            CharacterId.LU_BU -> R.drawable.img_character_lubu
+        }
+        ivPlayerImage.setImageResource(playerRes)
+
+        val enemyId = GameSession.buildEnemy().id // This is a bit hacky because buildEnemy is called in setupBattle too
+        // Actually, we should get the current enemy from GameSession if it was saved there.
+        // For now, let's use a generic image for non-bosses and specific ones for bosses.
+        val enemyName = viewModel.enemyNameText()
+        val enemyRes = when {
+            enemyName.contains("Lu Bu") -> R.drawable.img_character_lubu
+            enemyName.contains("Cao Cao") -> R.drawable.img_character_caocao
+            else -> R.drawable.img_enemy_generic
+        }
+        ivEnemyImage.setImageResource(enemyRes)
     }
 
     private fun setupRecycler() {

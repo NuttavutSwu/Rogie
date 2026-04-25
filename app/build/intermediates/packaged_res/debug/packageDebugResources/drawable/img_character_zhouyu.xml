@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <path
+        android:fillColor="#11000000"
+        android:pathData="M100,280m-60,0a60,20 0,1 1,120 0a60,20 0,1 1,-120 0" />
+    <!-- Wu Robes -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M70,100 L130,100 L150,280 L50,280 Z" />
+    <!-- Armor/Trim -->
+    <path
+        android:fillColor="#FF7043"
+        android:pathData="M85,100 L115,100 L120,180 L80,180 Z" />
+    <!-- Face -->
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M85,45 L115,45 L120,95 L80,95 Z" />
+    <!-- Naval Commander Hat -->
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M75,50 L125,50 L115,25 L85,25 Z" />
+    <!-- Sword -->
+    <path
+        android:strokeColor="#9E9E9E"
+        android:strokeWidth="4"
+        android:pathData="M60,150 L40,260" />
+    <path
+        android:fillColor="#FBC02D"
+        android:pathData="M55,145 L65,155 L60,165 L50,155 Z" />
+</vector>

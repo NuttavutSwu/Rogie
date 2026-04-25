@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <path
+        android:fillColor="#11000000"
+        android:pathData="M100,280m-60,0a60,20 0,1 1,120 0a60,20 0,1 1,-120 0" />
+    <!-- Demonic Armor -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M60,90 L140,90 L165,280 L35,280 Z" />
+    <!-- Red highlights -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M80,90 L120,90 L125,180 L75,180 Z" />
+    <!-- Face -->
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M85,35 L115,35 L120,85 L80,85 Z" />
+    <!-- Pheasant Tail Feathers (Helmet) -->
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M100,40 C140,0 160,60 180,20" />
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M100,40 C60,0 40,60 20,20" />
+    <!-- Sky Piercer (Halberd) -->
+    <path
+        android:strokeColor="#757575"
+        android:strokeWidth="5"
+        android:pathData="M160,40 L160,280" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M145,50 L160,30 L175,50 L160,100 Z" />
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M150,60 L170,60" />
+</vector>

@@ -13,6 +13,12 @@ drawable bg_scroll
 drawable ic_heart_empty
 drawable ic_heart_full
 drawable ic_heart_half
+drawable img_character_caocao
+drawable img_character_guanyu
+drawable img_character_lubu
+drawable img_character_zhouyu
+drawable img_character_zhugeliang
+drawable img_enemy_generic
 id btnBackToMenu
 id btnBeginRun
 id btnEndTurn
@@ -23,7 +29,10 @@ id btnSkillTree
 id btnSkipReward
 id btnStartGame
 id btnUnlockNode
+id combatArea
 id enemyPanel
+id ivEnemyImage
+id ivPlayerImage
 id llEnemyHearts
 id llPlayerHearts
 id llTalentNodes
@@ -58,6 +67,7 @@ id tvSkillPreview
 id tvStatus
 id tvTitle
 id tvTreeLegend
+id tvVs
 layout activity_battle
 layout activity_character_selection
 layout activity_death_summary
