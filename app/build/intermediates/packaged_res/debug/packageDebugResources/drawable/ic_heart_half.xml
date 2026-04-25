@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_heart_empty" />
+    <item
+        android:gravity="left"
+        android:width="10dp"
+        android:drawable="@drawable/ic_heart_full" />
+</layer-list>

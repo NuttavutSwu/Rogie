@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_death_summary.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_death_summary.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_item_card.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/item_card.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_battle.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_battle.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_skill_tree.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_skill_tree.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_ic_heart_full.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/ic_heart_full.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_main_menu.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_main_menu.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_reward.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_reward.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_ic_heart_empty.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/ic_heart_empty.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_character_selection.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_character_selection.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_item_talent_node.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/item_talent_node.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_bg_scroll.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/bg_scroll.xml"
+    },
+    {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_ic_heart_half.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/ic_heart_half.xml"
+    }
+]
