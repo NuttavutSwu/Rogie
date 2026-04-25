@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_dark">#1A2029</color>
+    <color name="scroll_bg">#E8D7B0</color>
+    <color name="scroll_stroke">#A88D5D</color>
+    <color name="scroll_ink">#2A2111</color>
+    <color name="talent_common">#6B6B6B</color>
+    <color name="talent_rare">#2B6FD6</color>
+    <color name="talent_legendary">#A04AD6</color>
+</resources>

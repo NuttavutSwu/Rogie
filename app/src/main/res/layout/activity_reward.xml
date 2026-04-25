@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/reward_title"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_scroll"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvRewardCard1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/scroll_ink" />
+            <Button
+                android:id="@+id/btnRewardCard1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_card" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_scroll"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvRewardCard2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/scroll_ink" />
+            <Button
+                android:id="@+id/btnRewardCard2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_card" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_scroll"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvRewardCard3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/scroll_ink" />
+            <Button
+                android:id="@+id/btnRewardCard3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_card" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSkipReward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/skip_reward" />
+    </LinearLayout>
+</ScrollView>
