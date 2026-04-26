@@ -2,6 +2,7 @@ package com.rogie.threekingdoms.game
 
 import com.rogie.threekingdoms.model.Card
 import com.rogie.threekingdoms.model.CardType
+import com.rogie.threekingdoms.model.CardRarity
 import com.rogie.threekingdoms.model.EffectType
 import com.rogie.threekingdoms.meta.CharacterId
 
@@ -33,89 +34,94 @@ object CardLibrary {
         slashAttack(), shieldFormation(), fireAttack(), warCry()
     )
 
+    // Nerfed damages for all cards due to lower HP environment
     fun slashAttack() = Card(
         name = "Slash Attack",
         energyCost = 1,
-        description = "Deal 8 damage.",
+        description = "Deal 1 damage.",
         type = CardType.ATTACK,
         effect = EffectType.DAMAGE,
-        value = 8
+        value = 1,
+        rarity = CardRarity.COMMON
     )
 
     fun shieldFormation() = Card(
         name = "Shield Formation",
         energyCost = 1,
-        description = "Gain 7 block.",
+        description = "Gain 1 block.",
         type = CardType.DEFENSE,
         effect = EffectType.BLOCK,
-        value = 7
+        value = 1,
+        rarity = CardRarity.COMMON
     )
 
     fun fireAttack() = Card(
         name = "Fire Attack",
         energyCost = 2,
-        description = "Deal 7 damage and inflict 3 burn.",
+        description = "Deal 1 damage and inflict 1 burn.",
         type = CardType.STRATEGY,
         effect = EffectType.BURN_STRIKE,
-        value = 7
+        value = 1,
+        rarity = CardRarity.COMMON
     )
 
     fun warCry() = Card(
         name = "War Cry",
         energyCost = 1,
-        description = "Gain 2 strength this combat.",
+        description = "Gain 1 strength this combat.",
         type = CardType.SKILL,
         effect = EffectType.BUFF_STRENGTH,
-        value = 2
+        value = 1,
+        rarity = CardRarity.COMMON
     )
 
     fun guanYuBlade() = Card(
         name = "Guan Yu - Green Dragon Slash",
         energyCost = 2,
-        description = "Deal 16 damage.",
+        description = "Deal 2 damage.",
         type = CardType.ATTACK,
         effect = EffectType.DAMAGE,
-        value = 16,
-        rarity = 2
+        value = 2,
+        rarity = CardRarity.RARE
     )
 
     fun zhangFeiRage() = Card(
         name = "Zhang Fei - Roaring Fury",
         energyCost = 2,
-        description = "Hit 3 times for 4 damage each.",
+        description = "Hit 3 times for 1 damage each.",
         type = CardType.ATTACK,
         effect = EffectType.MULTI_HIT,
-        value = 4,
-        rarity = 2
+        value = 1,
+        rarity = CardRarity.RARE
     )
 
     fun zhugeStrategy() = Card(
         name = "Zhuge Liang - Eight Trigrams",
         energyCost = 1,
-        description = "Gain 10 block and 1 strength.",
+        description = "Gain 1 block and 1 strength.",
         type = CardType.STRATEGY,
         effect = EffectType.BLOCK,
-        value = 10,
-        rarity = 2
+        value = 1,
+        rarity = CardRarity.RARE
     )
 
     fun caoCaoControl() = Card(
         name = "Cao Cao - Ruthless Command",
         energyCost = 2,
-        description = "Deal 10 damage and heal 4.",
+        description = "Deal 1 damage and heal 1.",
         type = CardType.SKILL,
         effect = EffectType.DRAIN,
-        value = 10,
-        rarity = 2
+        value = 1,
+        rarity = CardRarity.RARE
     )
 
     fun luBuSkyPierce() = Card(
         name = "Lu Bu - Sky Piercer",
         energyCost = 3,
-        description = "Deal 28 damage.",
+        description = "Deal 3 damage.",
         type = CardType.ATTACK,
         effect = EffectType.DAMAGE,
-        value = 28,
-        rarity = 3
+        value = 3,
+        rarity = CardRarity.EPIC
     )
 }

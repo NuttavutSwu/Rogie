@@ -15,14 +15,18 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
+        SoundManager.init(applicationContext)
+
         tvMetaPoints = findViewById(R.id.tvMetaPoints)
         refreshPoints()
 
         findViewById<Button>(R.id.btnStartGame).setOnClickListener {
+            SoundManager.play("click")
             startActivity(Intent(this, CharacterSelectionActivity::class.java))
         }
 
         findViewById<Button>(R.id.btnSkillTree).setOnClickListener {
+            SoundManager.play("click")
             startActivity(Intent(this, SkillTreeActivity::class.java))
         }
     }

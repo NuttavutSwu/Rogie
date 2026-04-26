@@ -2,6 +2,7 @@ package com.rogie.threekingdoms.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Button
@@ -23,7 +24,6 @@ class BattleActivity : AppCompatActivity() {
 
     private lateinit var tvPlayerHp: TextView
     private lateinit var tvEnemyHp: TextView
-    private lateinit var tvEnemyHpNumeric: TextView
     private lateinit var tvEnemyName: TextView
     private lateinit var tvCharacterStats: TextView
     private lateinit var tvEnergy: TextView
@@ -56,7 +56,6 @@ class BattleActivity : AppCompatActivity() {
     private fun bindViews() {
         tvPlayerHp = findViewById(R.id.tvPlayerHp)
         tvEnemyHp = findViewById(R.id.tvEnemyHp)
-        tvEnemyHpNumeric = findViewById(R.id.tvEnemyHpNumeric)
         tvEnemyName = findViewById(R.id.tvEnemyName)
         tvCharacterStats = findViewById(R.id.tvCharacterStats)
         tvEnergy = findViewById(R.id.tvEnergy)
@@ -78,9 +77,6 @@ class BattleActivity : AppCompatActivity() {
         }
         ivPlayerImage.setImageResource(playerRes)
 
-        val enemyId = GameSession.buildEnemy().id // This is a bit hacky because buildEnemy is called in setupBattle too
-        // Actually, we should get the current enemy from GameSession if it was saved there.
-        // For now, let's use a generic image for non-bosses and specific ones for bosses.
         val enemyName = viewModel.enemyNameText()
         val enemyRes = when {
             enemyName.contains("Lu Bu") -> R.drawable.img_character_lubu
@@ -117,35 +113,27 @@ class BattleActivity : AppCompatActivity() {
     }
 
     private fun refreshStats() {
-        tvPlayerHp.text = getString(R.string.player_hp_fmt, viewModel.playerHpText())
-        tvEnemyHp.text = getString(R.string.enemy_hp_fmt, viewModel.enemyHpText())
-        tvEnemyHpNumeric.text = getString(R.string.enemy_hp_raw_fmt, viewModel.enemyNumericHpText())
+        tvPlayerHp.text = viewModel.playerHpText()
+        tvEnemyHp.text = viewModel.enemyHpText()
         tvEnemyName.text = viewModel.enemyNameText()
-        tvCharacterStats.text = getString(R.string.character_stats_fmt, viewModel.characterStatsText())
-        tvEnergy.text = getString(R.string.energy_fmt, viewModel.playerEnergyText())
-        tvGold.text = getString(R.string.gold_fmt, viewModel.playerGoldText())
+        tvCharacterStats.text = viewModel.characterStatsText()
+        tvEnergy.text = viewModel.playerEnergyText()
+        tvGold.text = "Gold: ${viewModel.playerGoldText()}"
+        
         renderHearts(llPlayerHearts, viewModel.playerHpValue(), viewModel.playerMaxHpValue())
         renderHearts(llEnemyHearts, viewModel.enemyHpValue(), viewModel.enemyMaxHpValue())
     }
 
     private fun renderHearts(container: LinearLayout, currentHp: Int, maxHp: Int) {
         container.removeAllViews()
-        val maxHearts = maxHp / 20
-        val fullHearts = currentHp / 20
-        val hasHalf = (currentHp % 20) >= 10
-        repeat(maxHearts) { index ->
+        // Each heart is now 1 HP
+        repeat(maxHp) { index ->
             val heart = ImageView(this)
-            val drawable = when {
-                index < fullHearts -> R.drawable.ic_heart_full
-                index == fullHearts && hasHalf -> R.drawable.ic_heart_half
-                else -> R.drawable.ic_heart_empty
-            }
+            val drawable = if (index < currentHp) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
             heart.setImageResource(drawable)
-            val params = LinearLayout.LayoutParams(
-                resources.getDimensionPixelSize(R.dimen.heart_size),
-                resources.getDimensionPixelSize(R.dimen.heart_size)
-            )
-            params.marginEnd = resources.getDimensionPixelSize(R.dimen.heart_gap)
+            val size = resources.getDimensionPixelSize(R.dimen.heart_size_small)
+            val params = LinearLayout.LayoutParams(size, size)
+            params.marginEnd = 2
             heart.layoutParams = params
             container.addView(heart)
         }

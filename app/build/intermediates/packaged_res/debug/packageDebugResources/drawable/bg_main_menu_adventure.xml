@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="800dp"
+    android:viewportWidth="400"
+    android:viewportHeight="800">
+    <!-- Deep background -->
+    <path
+        android:fillColor="#1A2029"
+        android:pathData="M0,0h400v800h-400z" />
+    <!-- Distant Mountains -->
+    <path
+        android:fillColor="#263238"
+        android:pathData="M0,400 L50,320 L120,380 L200,300 L300,390 L400,340 L400,800 L0,800 Z" />
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M0,500 L80,420 L180,520 L280,430 L400,550 L400,800 L0,800 Z" />
+    <!-- Mist layer -->
+    <path
+        android:fillColor="#11FFFFFF"
+        android:pathData="M0,450 Q200,400 400,450 L400,800 L0,800 Z" />
+    <!-- Worn Map Texture overlay (simulated with paths) -->
+    <path
+        android:strokeColor="#22FFFFFF"
+        android:strokeWidth="1"
+        android:pathData="M50,100 L50,700 M100,50 L100,750 M300,100 L300,700 M350,50 L350,750" />
+    <path
+        android:strokeColor="#22FFFFFF"
+        android:strokeWidth="1"
+        android:pathData="M50,100 L350,100 M20,200 L380,200 M20,600 L380,600 M50,700 L350,700" />
+</vector>

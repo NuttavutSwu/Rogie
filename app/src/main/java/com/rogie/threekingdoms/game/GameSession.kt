@@ -69,9 +69,9 @@ object GameSession {
         applyCharacterPassive()
         applyTalents()
 
-        // Slight scaling to match permanent upgrades.
-        val hpBonusFromProgress = totalUpgradeLevels / 2
-        player.maxHp += hpBonusFromProgress * 20
+        // Health scaling adjusted for 1 HP per heart
+        val hpBonusFromProgress = totalUpgradeLevels / 5
+        player.maxHp += hpBonusFromProgress
         player.hp = player.maxHp
     }
 
@@ -79,8 +79,10 @@ object GameSession {
         enemiesDefeated++
         if (enemy.isBoss) {
             bossesDefeated++
+            // Unlock logic based on boss defeat
             if (enemy.id == "BOSS_LU_BU") pendingUnlock = CharacterId.LU_BU
             if (enemy.id == "BOSS_CAO_CAO") pendingUnlock = CharacterId.CAO_CAO
+            if (enemy.id == "BOSS_ZHOU_YU") pendingUnlock = CharacterId.ZHOU_YU
         }
     }
 
@@ -92,42 +94,27 @@ object GameSession {
         encounterCount++
         chapterReached = maxOf(chapterReached, ((encounterCount - 1) / 5) + 1)
         val isBoss = encounterCount % 5 == 0
-        val difficultyScale = 1.0 + (totalPowerLevel() * 0.02)
         return if (isBoss) {
             when (Random.nextInt(4)) {
-                0 -> scaledEnemy(Enemy("BOSS_LU_BU", "Lu Bu (Boss)", 120, 120, 18, isBoss = true), difficultyScale)
-                1 -> scaledEnemy(Enemy("BOSS_DONG_ZHUO", "Dong Zhuo (Boss)", 130, 130, 16, isBoss = true), difficultyScale)
-                2 -> scaledEnemy(Enemy("BOSS_YUAN_SHAO", "Yuan Shao (Boss)", 140, 140, 14, isBoss = true), difficultyScale)
-                else -> scaledEnemy(Enemy("BOSS_CAO_CAO", "Cao Cao (Boss)", 125, 125, 17, isBoss = true), difficultyScale)
+                0 -> Enemy("BOSS_LU_BU", "Lu Bu (Boss)", 10, 10, 2, isBoss = true)
+                1 -> Enemy("BOSS_DONG_ZHUO", "Dong Zhuo (Boss)", 11, 11, 1, isBoss = true)
+                2 -> Enemy("BOSS_YUAN_SHAO", "Yuan Shao (Boss)", 12, 12, 1, isBoss = true)
+                else -> Enemy("BOSS_CAO_CAO", "Cao Cao (Boss)", 10, 10, 2, isBoss = true)
             }
         } else {
             when (Random.nextInt(3)) {
-                0 -> scaledEnemy(Enemy("BANDITS", "Bandit Raiders", 45, 45, 9), difficultyScale)
-                1 -> scaledEnemy(Enemy("RIVAL_GENERAL", "Rival General", 55, 55, 10), difficultyScale)
-                else -> scaledEnemy(Enemy("ARMY", "Frontline Army", 65, 65, 12), difficultyScale)
+                0 -> Enemy("BANDITS", "Bandit Raiders", 3, 3, 1)
+                1 -> Enemy("RIVAL_GENERAL", "Rival General", 4, 4, 1)
+                else -> Enemy("ARMY", "Frontline Army", 5, 5, 1)
             }
         }
-    }
-
-    private fun totalPowerLevel(): Int {
-        val attackPower = ((attackMultiplier - 1.0) * 10).toInt().coerceAtLeast(0)
-        val strategyPower = ((strategyMultiplier - 1.0) * 10).toInt().coerceAtLeast(0)
-        return attackPower + strategyPower + drawBonusPerTurn +
-            if (skillDiscountEnabled) 2 else 0 + (if (damageReduction > 0.1) 2 else 0)
-    }
-
-    private fun scaledEnemy(enemy: Enemy, scale: Double): Enemy {
-        enemy.hp = (enemy.hp * scale).toInt()
-        enemy.maxHp = enemy.hp
-        enemy.damage = (enemy.damage * (1.0 + (scale - 1.0) * 0.5)).toInt()
-        return enemy
     }
 
     private fun applyCharacterPassive() {
         when (selectedCharacter) {
             CharacterId.GUAN_YU -> attackMultiplier += 0.10
             CharacterId.ZHUGE_LIANG -> drawBonusPerTurn += 1
-            CharacterId.CAO_CAO -> drainBonusHeal += 2
+            CharacterId.CAO_CAO -> drainBonusHeal += 1 // Nerfed
             CharacterId.ZHOU_YU -> strategyMultiplier += 0.15
             CharacterId.LU_BU -> attackMultiplier += 0.20
         }
@@ -140,8 +127,8 @@ object GameSession {
                 "gy_off_1" -> attackMultiplier += 0.20
                 "gy_off_2" -> critDamageMultiplier = 2.0
                 "gy_off_3" -> energyOnKill += 1
-                "gy_def_1" -> player.maxHp += 20
-                "gy_def_2" -> extraStartBlock += 6
+                "gy_def_1" -> player.maxHp += 1 // Nerfed to 1 HP
+                "gy_def_2" -> extraStartBlock += 1
                 "gy_def_3" -> damageReduction += 0.10
                 "gy_utl_1" -> player.baseEnergy += 1
                 "gy_utl_2" -> drawBonusPerTurn += 1
@@ -151,8 +138,8 @@ object GameSession {
                 "zl_off_1" -> attackMultiplier += 0.15
                 "zl_off_2" -> strategyMultiplier += 0.25
                 "zl_off_3" -> critChance += 0.10
-                "zl_def_1" -> player.maxHp += 20
-                "zl_def_2" -> extraStartBlock += 8
+                "zl_def_1" -> player.maxHp += 1
+                "zl_def_2" -> extraStartBlock += 1
                 "zl_def_3" -> damageReduction += 0.08
                 "zl_utl_1" -> drawBonusPerTurn += 1
                 "zl_utl_2" -> {
@@ -165,8 +152,8 @@ object GameSession {
                 "cc_off_1" -> attackMultiplier += 0.15
                 "cc_off_2" -> attackMultiplier += 0.10
                 "cc_off_3" -> critChance += 0.12
-                "cc_def_1" -> player.maxHp += 20
-                "cc_def_2" -> drainBonusHeal += 3
+                "cc_def_1" -> player.maxHp += 1
+                "cc_def_2" -> drainBonusHeal += 1
                 "cc_def_3" -> damageReduction += 0.12
                 "cc_utl_1" -> player.baseEnergy += 1
                 "cc_utl_2" -> bonusGoldPerVictory += 15
@@ -176,8 +163,8 @@ object GameSession {
                 "zy_off_1" -> strategyMultiplier += 0.20
                 "zy_off_2" -> strategyMultiplier += 0.15
                 "zy_off_3" -> attackMultiplier += 0.10
-                "zy_def_1" -> player.maxHp += 20
-                "zy_def_2" -> extraStartBlock += 8
+                "zy_def_1" -> player.maxHp += 1
+                "zy_def_2" -> extraStartBlock += 1
                 "zy_def_3" -> damageReduction += 0.10
                 "zy_utl_1" -> drawBonusPerTurn += 1
                 "zy_utl_2" -> skillDiscountEnabled = true
@@ -187,9 +174,9 @@ object GameSession {
                 "lb_off_1" -> attackMultiplier += 0.25
                 "lb_off_2" -> attackMultiplier += 0.15
                 "lb_off_3" -> attackMultiplier += 0.20
-                "lb_def_1" -> player.maxHp += 20
+                "lb_def_1" -> player.maxHp += 1
                 "lb_def_2" -> damageReduction += 0.08
-                "lb_def_3" -> extraStartBlock += 6
+                "lb_def_3" -> extraStartBlock += 1
                 "lb_utl_1" -> player.baseEnergy += 1
                 "lb_utl_2" -> energyOnKill += 1
                 "lb_utl_3" -> bonusGoldPerVictory += 20

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +13,6 @@ import com.rogie.threekingdoms.game.GameSession
 import com.rogie.threekingdoms.meta.CharacterId
 import com.rogie.threekingdoms.meta.CharacterLibrary
 import com.rogie.threekingdoms.meta.MetaProgressionManager
-import com.rogie.threekingdoms.meta.TalentTreeLibrary
 
 class CharacterSelectionActivity : AppCompatActivity() {
     private lateinit var unlockedCharacters: List<CharacterId>
@@ -30,11 +30,13 @@ class CharacterSelectionActivity : AppCompatActivity() {
         )
 
         val tvPassive = findViewById<TextView>(R.id.tvPassive)
-        val tvSkillPreview = findViewById<TextView>(R.id.tvSkillPreview)
         val tvStats = findViewById<TextView>(R.id.tvCharacterStats)
+        val ivPortrait = findViewById<ImageView>(R.id.ivCharacterPortrait)
 
         fun refreshPreview() {
-            val character = CharacterLibrary.get(unlockedCharacters[spinner.selectedItemPosition])
+            val chosenId = unlockedCharacters[spinner.selectedItemPosition]
+            val character = CharacterLibrary.get(chosenId)
+            
             tvPassive.text = "${character.passiveName}: ${character.passiveDescription}"
             tvStats.text = getString(
                 R.string.character_panel_fmt,
@@ -44,8 +46,15 @@ class CharacterSelectionActivity : AppCompatActivity() {
                 "${character.energy}",
                 "${(character.critChance * 100).toInt()}"
             )
-            val tree = TalentTreeLibrary.treeFor(character.id).nodes.take(6).joinToString("\n") { "- ${it.name}" }
-            tvSkillPreview.text = tree
+
+            val resId = when (chosenId) {
+                CharacterId.GUAN_YU -> R.drawable.img_character_guanyu
+                CharacterId.ZHUGE_LIANG -> R.drawable.img_character_zhugeliang
+                CharacterId.CAO_CAO -> R.drawable.img_character_caocao
+                CharacterId.ZHOU_YU -> R.drawable.img_character_zhouyu
+                CharacterId.LU_BU -> R.drawable.img_character_lubu
+            }
+            ivPortrait.setImageResource(resId)
         }
 
         spinner.setOnItemSelectedListener(
