@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/bg_dark">
 
-    <!-- Top Bar: Gold and Wave Info -->
+    <!-- Top Bar: Gold and Log Only -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Gold: 0"
             android:textColor="#FFD700"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <View
@@ -35,15 +36,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
     </LinearLayout>
 
-    <!-- Combat Visual Area -->
+    <!-- Combat Visual Area - Adjusted margin top to 60dp to move everything little upper -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/combatArea"
         android:layout_width="0dp"
-        android:layout_height="240dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar">
@@ -52,7 +55,7 @@
         <ImageView
             android:id="@+id/ivPlayerImage"
             android:layout_width="140dp"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_marginStart="16dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,6 +67,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toTopOf="@id/ivPlayerImage"
             app:layout_constraintStart_toStartOf="@id/ivPlayerImage"
             app:layout_constraintEnd_toEndOf="@id/ivPlayerImage">
@@ -73,6 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FF5252"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -86,7 +91,7 @@
         <ImageView
             android:id="@+id/ivEnemyImage"
             android:layout_width="140dp"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_marginEnd="16dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -98,6 +103,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toTopOf="@id/ivEnemyImage"
             app:layout_constraintStart_toStartOf="@id/ivEnemyImage"
             app:layout_constraintEnd_toEndOf="@id/ivEnemyImage">
@@ -107,13 +113,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvEnemyHp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FF5252" />
+                android:textColor="#FF5252"
+                android:textSize="10sp" />
 
             <LinearLayout
                 android:id="@+id/llEnemyHearts"
@@ -128,24 +136,25 @@
             android:layout_height="wrap_content"
             android:text="VS"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:alpha="0.5"
+            android:alpha="0.1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivEnemyImage"
             app:layout_constraintStart_toEndOf="@id/ivPlayerImage"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Character Stats Panel (Passive and Multipliers) -->
+    <!-- Character Stats Panel -->
     <TextView
         android:id="@+id/tvCharacterStats"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="#BDBDBD"
-        android:textSize="12sp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/combatArea" />
@@ -154,8 +163,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHand"
         android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@id/btnEndTurn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -163,8 +172,8 @@
     <!-- Energy Orb -->
     <FrameLayout
         android:id="@+id/energyOrbFrame"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -175,15 +184,15 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_energy_orb" />
 
-        <TextView
-            android:id="@+id/tvEnergy"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="3"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvEnergy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
     </FrameLayout>
 
     <Button

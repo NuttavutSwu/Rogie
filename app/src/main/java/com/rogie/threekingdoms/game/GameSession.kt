@@ -3,6 +3,7 @@ package com.rogie.threekingdoms.game
 import com.rogie.threekingdoms.model.Card
 import com.rogie.threekingdoms.model.Enemy
 import com.rogie.threekingdoms.model.Player
+import com.rogie.threekingdoms.model.Equipment
 import com.rogie.threekingdoms.meta.Character
 import com.rogie.threekingdoms.meta.CharacterId
 import kotlin.random.Random
@@ -11,6 +12,7 @@ object GameSession {
     lateinit var player: Player
     lateinit var character: Character
     var deck: MutableList<Card> = mutableListOf()
+    var inventory: MutableList<Equipment> = mutableListOf()
     lateinit var selectedCharacter: CharacterId
     var selectedTalents: Set<String> = emptySet()
     var encounterCount: Int = 0
@@ -47,6 +49,7 @@ object GameSession {
         player.hp = selected.maxHp
         player.speed = selected.speed
         deck = CardLibrary.starterDeck(selected.id).toMutableList()
+        inventory = mutableListOf()
         encounterCount = 0
         hasImperialSeal = false
         enemiesDefeated = 0

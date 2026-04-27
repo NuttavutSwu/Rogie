@@ -2112,6 +2112,7 @@ color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color talent_common
+color talent_epic
 color talent_legendary
 color talent_rare
 color tooltip_background_dark
@@ -3038,10 +3039,18 @@ drawable ic_character_zhouyu
 drawable ic_character_zhugeliang
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
+drawable ic_corner_decoration
+drawable ic_dragon_corner
 drawable ic_energy_orb
+drawable ic_equip_armor
+drawable ic_equip_mount
+drawable ic_equip_treasure
+drawable ic_equip_weapon
+drawable ic_flower_corner
 drawable ic_heart_empty
 drawable ic_heart_full
 drawable ic_heart_half
+drawable ic_inventory
 drawable ic_keyboard_black_24dp
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
@@ -3050,6 +3059,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_seal_signature
 drawable ic_search_black_24
 drawable img_character_caocao
 drawable img_character_guanyu
@@ -3233,6 +3243,7 @@ id bounceEnd
 id bounceStart
 id btnBackToMenu
 id btnBeginRun
+id btnCloseInv
 id btnContinue
 id btnEndTurn
 id btnRewardCard1
@@ -3378,10 +3389,14 @@ id inward
 id is_pooling_container_tag
 id italic
 id item_touch_helper_previous_elevation
+id ivArmor
 id ivCharacterPortrait
 id ivEnemyImage
+id ivMount
 id ivPlayerImage
 id ivPortrait
+id ivTreasure
+id ivWeapon
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3531,6 +3546,7 @@ id rlHeader
 id rounded
 id row_index_key
 id rvHand
+id rvInventory
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3565,6 +3581,10 @@ id sin
 id skipCollapsed
 id skipped
 id slide
+id slotArmor
+id slotMount
+id slotTreasure
+id slotWeapon
 id snackbar_action
 id snackbar_text
 id snap
@@ -3595,6 +3615,7 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id tabInvCategories
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3655,6 +3676,7 @@ id tvEnemyName
 id tvEnergy
 id tvFactionSymbol
 id tvGold
+id tvInvTitle
 id tvMetaPoints
 id tvName
 id tvNameLabel
@@ -3819,6 +3841,7 @@ layout abc_tooltip
 layout activity_battle
 layout activity_character_selection
 layout activity_death_summary
+layout activity_inventory
 layout activity_main_menu
 layout activity_reward
 layout activity_skill_tree
@@ -3844,6 +3867,7 @@ layout ime_secondary_split_test_activity
 layout item_card
 layout item_character_portrait
 layout item_talent_node
+layout layout_equipment
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title

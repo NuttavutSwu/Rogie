@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="8dp"
+    android:background="@drawable/bg_scroll"
+    android:alpha="0.9">
+
+    <FrameLayout
+        android:id="@+id/slotWeapon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="#22000000">
+        <ImageView
+            android:id="@+id/ivWeapon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_equip_weapon"
+            android:alpha="0.3" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/slotArmor"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="#22000000">
+        <ImageView
+            android:id="@+id/ivArmor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_equip_armor"
+            android:alpha="0.3" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/slotMount"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="#22000000">
+        <ImageView
+            android:id="@+id/ivMount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_equip_mount"
+            android:alpha="0.3" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/slotTreasure"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="#22000000">
+        <ImageView
+            android:id="@+id/ivTreasure"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_equip_treasure"
+            android:alpha="0.3" />
+    </FrameLayout>
+
+</LinearLayout>

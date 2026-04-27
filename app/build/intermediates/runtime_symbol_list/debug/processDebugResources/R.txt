@@ -2111,6 +2111,7 @@ int color switch_thumb_material_light 0x7f05030c
 int color switch_thumb_normal_material_dark 0x7f05030d
 int color switch_thumb_normal_material_light 0x7f05030e
 int color talent_common 0x7f05030f
+int color talent_epic 0x7f050314
 int color talent_legendary 0x7f050310
 int color talent_rare 0x7f050311
 int color tooltip_background_dark 0x7f050312
@@ -3037,10 +3038,18 @@ int drawable ic_character_zhouyu 0x7f070095
 int drawable ic_character_zhugeliang 0x7f070096
 int drawable ic_clear_black_24 0x7f070097
 int drawable ic_clock_black_24dp 0x7f070098
+int drawable ic_corner_decoration 0x7f070100
+int drawable ic_dragon_corner 0x7f070102
 int drawable ic_energy_orb 0x7f070099
+int drawable ic_equip_armor 0x7f0700fb
+int drawable ic_equip_mount 0x7f0700fc
+int drawable ic_equip_treasure 0x7f0700fd
+int drawable ic_equip_weapon 0x7f0700fe
+int drawable ic_flower_corner 0x7f070103
 int drawable ic_heart_empty 0x7f07009a
 int drawable ic_heart_full 0x7f07009b
 int drawable ic_heart_half 0x7f07009c
+int drawable ic_inventory 0x7f0700ff
 int drawable ic_keyboard_black_24dp 0x7f07009d
 int drawable ic_m3_chip_check 0x7f07009e
 int drawable ic_m3_chip_checked_circle 0x7f07009f
@@ -3049,6 +3058,7 @@ int drawable ic_mtrl_checked_circle 0x7f0700a1
 int drawable ic_mtrl_chip_checked_black 0x7f0700a2
 int drawable ic_mtrl_chip_checked_circle 0x7f0700a3
 int drawable ic_mtrl_chip_close_circle 0x7f0700a4
+int drawable ic_seal_signature 0x7f070101
 int drawable ic_search_black_24 0x7f0700a5
 int drawable img_character_caocao 0x7f0700a6
 int drawable img_character_guanyu 0x7f0700a7
@@ -3232,6 +3242,7 @@ int id bounceEnd 0x7f080060
 int id bounceStart 0x7f080061
 int id btnBackToMenu 0x7f080062
 int id btnBeginRun 0x7f080063
+int id btnCloseInv 0x7f080241
 int id btnContinue 0x7f080234
 int id btnEndTurn 0x7f080064
 int id btnRewardCard1 0x7f080065
@@ -3377,10 +3388,14 @@ int id inward 0x7f0800f0
 int id is_pooling_container_tag 0x7f0800f1
 int id italic 0x7f0800f2
 int id item_touch_helper_previous_elevation 0x7f0800f3
+int id ivArmor 0x7f080239
 int id ivCharacterPortrait 0x7f0800f4
 int id ivEnemyImage 0x7f0800f5
+int id ivMount 0x7f08023a
 int id ivPlayerImage 0x7f0800f6
 int id ivPortrait 0x7f0800f7
+int id ivTreasure 0x7f08023b
+int id ivWeapon 0x7f08023c
 int id jumpToEnd 0x7f0800f8
 int id jumpToStart 0x7f0800f9
 int id labeled 0x7f0800fa
@@ -3530,6 +3545,7 @@ int id rlHeader 0x7f080187
 int id rounded 0x7f080188
 int id row_index_key 0x7f080189
 int id rvHand 0x7f08018a
+int id rvInventory 0x7f080242
 int id save_non_transition_alpha 0x7f08018b
 int id save_overlay_view 0x7f08018c
 int id sawtooth 0x7f08018d
@@ -3564,6 +3580,10 @@ int id sin 0x7f0801a9
 int id skipCollapsed 0x7f0801aa
 int id skipped 0x7f0801ab
 int id slide 0x7f0801ac
+int id slotArmor 0x7f08023d
+int id slotMount 0x7f08023e
+int id slotTreasure 0x7f08023f
+int id slotWeapon 0x7f080240
 int id snackbar_action 0x7f0801ad
 int id snackbar_text 0x7f0801ae
 int id snap 0x7f0801af
@@ -3594,6 +3614,7 @@ int id stretch 0x7f0801c7
 int id submenuarrow 0x7f0801c8
 int id submit_area 0x7f0801c9
 int id supportScrollUp 0x7f0801ca
+int id tabInvCategories 0x7f080243
 int id tabMode 0x7f0801cb
 int id tag_accessibility_actions 0x7f0801cc
 int id tag_accessibility_clickable_spans 0x7f0801cd
@@ -3654,6 +3675,7 @@ int id tvEnemyName 0x7f080203
 int id tvEnergy 0x7f080204
 int id tvFactionSymbol 0x7f080205
 int id tvGold 0x7f080206
+int id tvInvTitle 0x7f080244
 int id tvMetaPoints 0x7f080207
 int id tvName 0x7f080208
 int id tvNameLabel 0x7f080209
@@ -3818,6 +3840,7 @@ int layout abc_tooltip 0x7f0b001b
 int layout activity_battle 0x7f0b001c
 int layout activity_character_selection 0x7f0b001d
 int layout activity_death_summary 0x7f0b001e
+int layout activity_inventory 0x7f0b0076
 int layout activity_main_menu 0x7f0b001f
 int layout activity_reward 0x7f0b0020
 int layout activity_skill_tree 0x7f0b0021
@@ -3843,6 +3866,7 @@ int layout ime_secondary_split_test_activity 0x7f0b0033
 int layout item_card 0x7f0b0034
 int layout item_character_portrait 0x7f0b0035
 int layout item_talent_node 0x7f0b0036
+int layout layout_equipment 0x7f0b0075
 int layout m3_alert_dialog 0x7f0b0037
 int layout m3_alert_dialog_actions 0x7f0b0038
 int layout m3_alert_dialog_title 0x7f0b0039

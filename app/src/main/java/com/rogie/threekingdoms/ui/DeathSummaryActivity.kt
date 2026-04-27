@@ -13,16 +13,15 @@ class DeathSummaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_death_summary)
 
-        val earned = intent.getIntExtra("earned_points", 0)
-        val enemies = intent.getIntExtra("enemies_defeated", 0)
-        val bosses = intent.getIntExtra("bosses_defeated", 0)
-        val chapter = intent.getIntExtra("chapter_reached", 1)
-        val totalPoints = MetaProgressionManager.getSkillPoints(this)
+        MetaProgressionManager.incrementDeathCount(this)
+        val deathCount = MetaProgressionManager.getDeathCount(this)
 
-        findViewById<TextView>(R.id.tvDeathSummary).text =
-            "Run Over\nEnemies defeated: $enemies\nBosses defeated: $bosses\nChapter reached: $chapter"
-        findViewById<TextView>(R.id.tvPointsEarned).text =
-            "Skill Points earned: $earned\nTotal Skill Points: $totalPoints"
+        val tvMessage = findViewById<TextView>(R.id.tvDeathSummary)
+        tvMessage.text = when {
+            deathCount == 1 -> "การเดินทางครั้งแรกสิ้นสุดลง... แต่นี่เป็นเพียงจุดเริ่มต้นของกงล้อแห่งกรรม"
+            deathCount < 5 -> "ความตายครั้งที่ $deathCount... วิญญาณของท่านเริ่มแปดเปื้อนด้วยไอแห่งสมรภูมิ"
+            else -> "ยินดีที่ได้พบกันอีกครั้ง... ท่านแม่ทัพ ท่านยังไม่เหนื่อยกับการรบที่ไม่มีวันสิ้นสุดนี้อีกหรือ?"
+        }
 
         findViewById<Button>(R.id.btnBackToMenu).setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))
