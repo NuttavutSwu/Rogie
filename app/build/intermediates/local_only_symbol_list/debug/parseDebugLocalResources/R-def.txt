@@ -18,8 +18,11 @@ color talent_rare
 dimen heart_gap
 dimen heart_size
 dimen heart_size_small
+drawable bg_card_epic
 drawable bg_card_front
+drawable bg_card_legendary
 drawable bg_card_parchment
+drawable bg_card_rare
 drawable bg_main_menu_adventure
 drawable bg_scroll
 drawable ic_card_decoration
@@ -40,6 +43,7 @@ drawable img_character_zhugeliang
 drawable img_enemy_generic
 id btnBackToMenu
 id btnBeginRun
+id btnContinue
 id btnEndTurn
 id btnRewardCard1
 id btnRewardCard2
@@ -58,10 +62,12 @@ id ivPlayerImage
 id ivPortrait
 id llEnemyHearts
 id llEnemyInfo
+id llOptionsContainer
 id llPlayerHearts
 id llPlayerInfo
 id llTalentNodes
 id menuPanel
+id rlCardRoot
 id rlHeader
 id rvHand
 id selectionOverlay
@@ -87,6 +93,7 @@ id tvNodeState
 id tvPassive
 id tvPlayerHp
 id tvPointsEarned
+id tvResult
 id tvRewardCard1
 id tvRewardCard2
 id tvRewardCard3
@@ -95,6 +102,8 @@ id tvStatAtk
 id tvStatCost
 id tvStatDef
 id tvStatus
+id tvStoryDescription
+id tvStoryTitle
 id tvTitle
 id tvTreeLegend
 id tvTypeLabel
@@ -105,6 +114,7 @@ layout activity_death_summary
 layout activity_main_menu
 layout activity_reward
 layout activity_skill_tree
+layout activity_story
 layout item_card
 layout item_character_portrait
 layout item_talent_node

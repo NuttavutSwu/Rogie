@@ -19,11 +19,13 @@ class BattleManager(
     private var usedDiscountThisTurn = false
     private var usedFirstAttackBonusThisTurn = false
     private var isPlayerTurn = true
+    private var enemyStrength = 0
 
     fun startBattle() {
         player.energy = player.baseEnergy
         player.block = 0
         player.strength = 0
+        enemyStrength = 0
         player.statuses.clear()
         enemy.statuses.clear()
         
@@ -178,34 +180,104 @@ class BattleManager(
         processStatuses(enemy)
         if (enemy.hp <= 0) return "Enemy defeated by status effects."
 
-        // Simple AI behaviors
-        val behavior = when {
-            enemy.hp < enemy.maxHp * 0.3 -> "Defensive"
-            enemy.isBoss -> "Tactical"
-            else -> "Aggressive"
+        // More complex AI Strategy
+        return when (enemy.id) {
+            "BANDITS" -> executeBanditAI()
+            "RIVAL_GENERAL" -> executeGeneralAI()
+            "ARMY" -> executeArmyAI()
+            else -> if (enemy.isBoss) executeBossAI() else executeBasicAI()
         }
+    }
 
-        return when (behavior) {
-            "Defensive" -> {
-                enemy.block += 1
-                "Enemy takes a defensive stance."
+    private fun executeBanditAI(): String {
+        val rand = Random.nextInt(3)
+        return when (rand) {
+            0 -> {
+                val dmg = dealDamageToPlayer(1)
+                player.energy = max(0, player.energy - 1)
+                "Bandit steals your focus! $dmg damage and -1 Energy."
             }
-            "Tactical" -> {
-                if (Random.nextBoolean()) {
-                    val dmg = (enemy.damage * (1.0 - GameSession.damageReduction)).toInt()
-                    player.hp -= max(0, dmg - player.block)
-                    "Enemy executes a tactical strike."
-                } else {
-                    player.statuses.add(StatusEffect(EffectType.BLEED, 2, 1))
-                    "Enemy applies pressure (Bleed)."
-                }
+            1 -> {
+                var total = 0
+                repeat(2) { total += dealDamageToPlayer(1) }
+                "Bandit multi-strikes! $total damage."
             }
             else -> {
-                val dmg = (enemy.damage * (1.0 - GameSession.damageReduction)).toInt()
-                player.hp -= max(0, dmg - player.block)
-                "${enemy.name} attacks for $dmg damage."
+                enemy.block += 1
+                "Bandit hides in the shadows (Block +1)."
             }
         }
+    }
+
+    private fun executeGeneralAI(): String {
+        val rand = Random.nextInt(3)
+        return when (rand) {
+            0 -> {
+                enemyStrength += 1
+                "Rival General rallies! Strength +1."
+            }
+            1 -> {
+                val dmg = dealDamageToPlayer(enemy.damage + enemyStrength)
+                "Rival General executes a precise strike for $dmg."
+            }
+            else -> {
+                player.statuses.add(StatusEffect(EffectType.BLEED, 2, 1))
+                "Rival General causes you to bleed!"
+            }
+        }
+    }
+
+    private fun executeArmyAI(): String {
+        if (player.block == 0 && Random.nextBoolean()) {
+            val dmg = dealDamageToPlayer(enemy.damage + 2)
+            return "Vanguard coordinated strike! Heavy $dmg damage since you were unguarded."
+        }
+        enemy.block += 2
+        return "Army forms a shield wall! Block +2."
+    }
+
+    private fun executeBossAI(): String {
+        val hpRatio = enemy.hp.toDouble() / enemy.maxHp.toDouble()
+        if (hpRatio < 0.3 && enemy.block < 2) {
+            enemy.block += 3
+            return "${enemy.name} goes into a desperate defense! Block +3."
+        }
+        
+        return when (enemy.id) {
+            "BOSS_LU_BU" -> {
+                if (hpRatio < 0.5) {
+                    val dmg = dealDamageToPlayer(enemy.damage + 2)
+                    "${enemy.name} is ENRAGED! Massive swing for $dmg damage."
+                } else {
+                    val dmg = dealDamageToPlayer(enemy.damage)
+                    player.statuses.add(StatusEffect(EffectType.BLEED, 3, 1))
+                    "${enemy.name} strikes and leaves a deep wound."
+                }
+            }
+            "BOSS_CAO_CAO" -> {
+                if (Random.nextBoolean()) {
+                    player.energy = max(0, player.energy - 2)
+                    "Cao Cao uses dark schemes! You lose 2 Energy."
+                } else {
+                    val dmg = dealDamageToPlayer(enemy.damage)
+                    "Cao Cao suppresses you for $dmg damage."
+                }
+            }
+            else -> executeBasicAI()
+        }
+    }
+
+    private fun executeBasicAI(): String {
+        val dmg = dealDamageToPlayer(enemy.damage)
+        return "${enemy.name} attacks for $dmg damage."
+    }
+
+    private fun dealDamageToPlayer(rawDamage: Int): Int {
+        val incoming = (rawDamage * (1.0 - GameSession.damageReduction)).toInt()
+        val actual = max(0, incoming - player.block)
+        player.hp -= actual
+        player.block = max(0, player.block - incoming)
+        return actual
     }
 
     private fun processStatuses(entity: Any) {
@@ -218,7 +290,6 @@ class BattleManager(
                     if (entity is Player) entity.hp -= status.value else (entity as Enemy).hp -= status.value
                 }
                 EffectType.BLEED -> {
-                    // In design: lose HP when acting. Simplified to start of turn for now.
                     if (entity is Player) entity.hp -= status.value else (entity as Enemy).hp -= status.value
                 }
                 else -> {}

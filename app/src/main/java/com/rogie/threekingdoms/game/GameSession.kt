@@ -33,6 +33,8 @@ object GameSession {
     var extraStartBlock: Int = 0
     var luBuSelfHeartLossStart: Boolean = false
     var firstAttackBonusPerTurn: Double = 0.0
+    
+    private var nextForcedEnemy: Enemy? = null
 
     fun startRun(selected: Character, totalUpgradeLevels: Int, unlockedTalents: Set<String>) {
         selectedCharacter = selected.id
@@ -43,6 +45,7 @@ object GameSession {
         player.energy = selected.energy
         player.maxHp = selected.maxHp
         player.hp = selected.maxHp
+        player.speed = selected.speed
         deck = CardLibrary.starterDeck(selected.id).toMutableList()
         encounterCount = 0
         hasImperialSeal = false
@@ -50,6 +53,7 @@ object GameSession {
         bossesDefeated = 0
         chapterReached = 1
         pendingUnlock = null
+        nextForcedEnemy = null
 
         attackMultiplier = 1.0
         critDamageMultiplier = 1.5
@@ -59,7 +63,7 @@ object GameSession {
         skillDiscountEnabled = false
         discountOncePerTurn = false
         drainBonusHeal = 0
-        damageReduction = selected.defense * 0.01
+        damageReduction = selected.defense * 0.02
         bonusGoldPerVictory = 0
         energyOnKill = 0
         extraStartBlock = 0
@@ -69,17 +73,19 @@ object GameSession {
         applyCharacterPassive()
         applyTalents()
 
-        // Health scaling adjusted for 1 HP per heart
-        val hpBonusFromProgress = totalUpgradeLevels / 5
+        val hpBonusFromProgress = totalUpgradeLevels / 8
         player.maxHp += hpBonusFromProgress
         player.hp = player.maxHp
+    }
+
+    fun setForcedEnemy(enemy: Enemy) {
+        nextForcedEnemy = enemy
     }
 
     fun onEnemyDefeated(enemy: Enemy) {
         enemiesDefeated++
         if (enemy.isBoss) {
             bossesDefeated++
-            // Unlock logic based on boss defeat
             if (enemy.id == "BOSS_LU_BU") pendingUnlock = CharacterId.LU_BU
             if (enemy.id == "BOSS_CAO_CAO") pendingUnlock = CharacterId.CAO_CAO
             if (enemy.id == "BOSS_ZHOU_YU") pendingUnlock = CharacterId.ZHOU_YU
@@ -91,21 +97,29 @@ object GameSession {
     }
 
     fun buildEnemy(): Enemy {
+        nextForcedEnemy?.let {
+            val e = it
+            nextForcedEnemy = null
+            return e
+        }
+
         encounterCount++
         chapterReached = maxOf(chapterReached, ((encounterCount - 1) / 5) + 1)
         val isBoss = encounterCount % 5 == 0
+        val scale = 1.0 + (encounterCount * 0.15)
+        
         return if (isBoss) {
             when (Random.nextInt(4)) {
-                0 -> Enemy("BOSS_LU_BU", "Lu Bu (Boss)", 10, 10, 2, isBoss = true)
-                1 -> Enemy("BOSS_DONG_ZHUO", "Dong Zhuo (Boss)", 11, 11, 1, isBoss = true)
-                2 -> Enemy("BOSS_YUAN_SHAO", "Yuan Shao (Boss)", 12, 12, 1, isBoss = true)
-                else -> Enemy("BOSS_CAO_CAO", "Cao Cao (Boss)", 10, 10, 2, isBoss = true)
+                0 -> Enemy("BOSS_LU_BU", "Lu Bu (Overlord)", (15 * scale).toInt(), (15 * scale).toInt(), (2 * scale).toInt(), isBoss = true, speed = 15)
+                1 -> Enemy("BOSS_DONG_ZHUO", "Dong Zhuo (Tyrant)", (18 * scale).toInt(), (18 * scale).toInt(), (1 * scale).toInt(), isBoss = true, speed = 8)
+                2 -> Enemy("BOSS_YUAN_SHAO", "Yuan Shao (Noble)", (16 * scale).toInt(), (16 * scale).toInt(), (1 * scale).toInt(), isBoss = true, speed = 11)
+                else -> Enemy("BOSS_CAO_CAO", "Cao Cao (Hero of Chaos)", (14 * scale).toInt(), (14 * scale).toInt(), (2 * scale).toInt(), isBoss = true, speed = 12)
             }
         } else {
             when (Random.nextInt(3)) {
-                0 -> Enemy("BANDITS", "Bandit Raiders", 3, 3, 1)
-                1 -> Enemy("RIVAL_GENERAL", "Rival General", 4, 4, 1)
-                else -> Enemy("ARMY", "Frontline Army", 5, 5, 1)
+                0 -> Enemy("BANDITS", "Bandit Raiders", (5 * scale).toInt(), (5 * scale).toInt(), (1 * scale).toInt(), speed = 9)
+                1 -> Enemy("RIVAL_GENERAL", "Rival General", (6 * scale).toInt(), (6 * scale).toInt(), (1 * scale).toInt(), speed = 11)
+                else -> Enemy("ARMY", "Vanguard Force", (8 * scale).toInt(), (8 * scale).toInt(), (1 * scale).toInt(), speed = 10)
             }
         }
     }
@@ -114,7 +128,7 @@ object GameSession {
         when (selectedCharacter) {
             CharacterId.GUAN_YU -> attackMultiplier += 0.10
             CharacterId.ZHUGE_LIANG -> drawBonusPerTurn += 1
-            CharacterId.CAO_CAO -> drainBonusHeal += 1 // Nerfed
+            CharacterId.CAO_CAO -> drainBonusHeal += 1
             CharacterId.ZHOU_YU -> strategyMultiplier += 0.15
             CharacterId.LU_BU -> attackMultiplier += 0.20
         }
@@ -127,7 +141,7 @@ object GameSession {
                 "gy_off_1" -> attackMultiplier += 0.20
                 "gy_off_2" -> critDamageMultiplier = 2.0
                 "gy_off_3" -> energyOnKill += 1
-                "gy_def_1" -> player.maxHp += 1 // Nerfed to 1 HP
+                "gy_def_1" -> player.maxHp += 1
                 "gy_def_2" -> extraStartBlock += 1
                 "gy_def_3" -> damageReduction += 0.10
                 "gy_utl_1" -> player.baseEnergy += 1

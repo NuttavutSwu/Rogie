@@ -12,10 +12,6 @@
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\bg_scroll.xml"
     },
     {
-        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_item_card.xml.flat",
-        "source": "com.rogie.threekingdoms.app-main-40:/layout/item_card.xml"
-    },
-    {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_img_enemy_generic.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\img_enemy_generic.xml"
     },
@@ -28,8 +24,16 @@
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_heart_empty.xml"
     },
     {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/layout_activity_story.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/layout/activity_story.xml"
+    },
+    {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_heart_half.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_heart_half.xml"
+    },
+    {
+        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_bg_card_legendary.xml.flat",
+        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\bg_card_legendary.xml"
     },
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\layout_activity_battle.xml.flat",
@@ -38,6 +42,10 @@
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\layout_activity_character_selection.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\layout\\activity_character_selection.xml"
+    },
+    {
+        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_bg_card_rare.xml.flat",
+        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\bg_card_rare.xml"
     },
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_img_character_guanyu.xml.flat",
@@ -66,6 +74,10 @@
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_character_zhouyu.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_character_zhouyu.xml"
+    },
+    {
+        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_bg_card_epic.xml.flat",
+        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\bg_card_epic.xml"
     },
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_character_lubu.xml.flat",

@@ -3003,8 +3003,11 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_card_epic
 drawable bg_card_front
+drawable bg_card_legendary
 drawable bg_card_parchment
+drawable bg_card_rare
 drawable bg_main_menu_adventure
 drawable bg_scroll
 drawable btn_checkbox_checked_mtrl
@@ -3230,6 +3233,7 @@ id bounceEnd
 id bounceStart
 id btnBackToMenu
 id btnBeginRun
+id btnContinue
 id btnEndTurn
 id btnRewardCard1
 id btnRewardCard2
@@ -3392,6 +3396,7 @@ id listMode
 id list_item
 id llEnemyHearts
 id llEnemyInfo
+id llOptionsContainer
 id llPlayerHearts
 id llPlayerInfo
 id llTalentNodes
@@ -3521,6 +3526,7 @@ id right
 id rightToLeft
 id right_icon
 id right_side
+id rlCardRoot
 id rlHeader
 id rounded
 id row_index_key
@@ -3658,6 +3664,7 @@ id tvNodeState
 id tvPassive
 id tvPlayerHp
 id tvPointsEarned
+id tvResult
 id tvRewardCard1
 id tvRewardCard2
 id tvRewardCard3
@@ -3666,6 +3673,8 @@ id tvStatAtk
 id tvStatCost
 id tvStatDef
 id tvStatus
+id tvStoryDescription
+id tvStoryTitle
 id tvTitle
 id tvTreeLegend
 id tvTypeLabel
@@ -3813,6 +3822,7 @@ layout activity_death_summary
 layout activity_main_menu
 layout activity_reward
 layout activity_skill_tree
+layout activity_story
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

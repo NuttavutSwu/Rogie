@@ -3,11 +3,13 @@ package com.rogie.threekingdoms.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rogie.threekingdoms.R
 import com.rogie.threekingdoms.model.Card
 import com.rogie.threekingdoms.model.CardType
+import com.rogie.threekingdoms.model.CardRarity
 import com.rogie.threekingdoms.game.GameSession
 
 class CardAdapter(
@@ -42,6 +44,7 @@ class CardAdapter(
         private val tvAtk = itemView.findViewById<TextView>(R.id.tvStatAtk)
         private val tvDef = itemView.findViewById<TextView>(R.id.tvStatDef)
         private val tvCostBottom = itemView.findViewById<TextView>(R.id.tvStatCost)
+        private val rlRoot = itemView.findViewById<RelativeLayout>(R.id.rlCardRoot)
 
         fun bind(card: Card, onCardClicked: (Card) -> Unit) {
             tvNameHeader.text = card.name
@@ -60,6 +63,15 @@ class CardAdapter(
                 "WU" -> "吳"
                 else -> "漢"
             }
+
+            // Set different background based on rarity
+            val bgRes = when(card.rarity) {
+                CardRarity.COMMON -> R.drawable.bg_card_parchment
+                CardRarity.RARE -> R.drawable.bg_card_rare
+                CardRarity.EPIC -> R.drawable.bg_card_epic
+                CardRarity.LEGENDARY -> R.drawable.bg_card_legendary
+            }
+            rlRoot.setBackgroundResource(bgRes)
 
             itemView.setOnClickListener { onCardClicked(card) }
         }

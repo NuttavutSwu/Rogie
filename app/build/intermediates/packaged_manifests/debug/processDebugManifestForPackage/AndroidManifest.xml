@@ -41,6 +41,9 @@
             android:name="com.rogie.threekingdoms.ui.BattleActivity"
             android:exported="false" />
         <activity
+            android:name="com.rogie.threekingdoms.ui.StoryActivity"
+            android:exported="false" />
+        <activity
             android:name="com.rogie.threekingdoms.ui.MainMenuActivity"
             android:exported="true" >
             <intent-filter>

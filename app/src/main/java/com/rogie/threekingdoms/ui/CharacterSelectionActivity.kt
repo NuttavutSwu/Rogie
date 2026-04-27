@@ -76,7 +76,8 @@ class CharacterSelectionActivity : AppCompatActivity() {
             val totalUpgrades = MetaProgressionManager.getTotalUpgradeLevels(this)
             val unlockedTalents = MetaProgressionManager.getUnlockedTalents(this, chosen)
             GameSession.startRun(character, totalUpgrades, unlockedTalents)
-            startActivity(Intent(this, BattleActivity::class.java))
+            // Redirect to StoryActivity first
+            startActivity(Intent(this, StoryActivity::class.java))
             finish()
         }
     }

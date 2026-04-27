@@ -1,8 +1,13 @@
 package com.rogie.threekingdoms.ui
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.CycleInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Button
@@ -17,6 +22,7 @@ import com.rogie.threekingdoms.game.GameSession
 import com.rogie.threekingdoms.meta.CharacterId
 import com.rogie.threekingdoms.meta.CharacterLibrary
 import com.rogie.threekingdoms.meta.MetaProgressionManager
+import com.rogie.threekingdoms.model.CardType
 
 class BattleActivity : AppCompatActivity() {
     private val viewModel: BattleViewModel by viewModels()
@@ -43,9 +49,12 @@ class BattleActivity : AppCompatActivity() {
         setupObservers()
 
         findViewById<Button>(R.id.btnEndTurn).setOnClickListener {
-            viewModel.endTurn()
-            refreshStats()
-            processBattleState()
+            playEnemyAttackAnimation {
+                viewModel.endTurn()
+                refreshStats()
+                processBattleState()
+                playPlayerHitAnimation()
+            }
         }
 
         viewModel.setupBattle()
@@ -88,9 +97,26 @@ class BattleActivity : AppCompatActivity() {
 
     private fun setupRecycler() {
         cardAdapter = CardAdapter { card ->
-            viewModel.playCard(card)
-            refreshStats()
-            processBattleState()
+            val hasEnergy = GameSession.player.energy >= card.energyCost
+            
+            if (!hasEnergy) {
+                playTiredAnimation()
+                viewModel.playCard(card)
+                return@CardAdapter
+            }
+
+            if (card.type == CardType.ATTACK) {
+                playAttackAnimation {
+                    viewModel.playCard(card)
+                    refreshStats()
+                    processBattleState()
+                    playEnemyHitAnimation()
+                }
+            } else {
+                viewModel.playCard(card)
+                refreshStats()
+                processBattleState()
+            }
         }
 
         findViewById<RecyclerView>(R.id.rvHand).apply {
@@ -101,6 +127,108 @@ class BattleActivity : AppCompatActivity() {
             )
             adapter = cardAdapter
         }
+    }
+
+    private fun playAttackAnimation(onStrike: () -> Unit) {
+        val originalX = ivPlayerImage.translationX
+        val distance = (ivEnemyImage.x - ivPlayerImage.x) * 0.7f
+
+        ivPlayerImage.animate()
+            .translationXBy(distance)
+            .setDuration(250)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    onStrike()
+                    ivPlayerImage.animate()
+                        .translationX(originalX)
+                        .setDuration(400)
+                        .setInterpolator(DecelerateInterpolator())
+                        .setListener(null)
+                        .start()
+                }
+            })
+            .start()
+    }
+
+    private fun playEnemyAttackAnimation(onStrike: () -> Unit) {
+        val originalX = ivEnemyImage.translationX
+        val distance = (ivPlayerImage.x - ivEnemyImage.x) * 0.7f
+
+        ivEnemyImage.animate()
+            .translationXBy(distance)
+            .setDuration(300)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    onStrike()
+                    ivEnemyImage.animate()
+                        .translationX(originalX)
+                        .setDuration(450)
+                        .setInterpolator(DecelerateInterpolator())
+                        .setListener(null)
+                        .start()
+                }
+            })
+            .start()
+    }
+
+    private fun playTiredAnimation() {
+        ivPlayerImage.animate()
+            .translationYBy(20f)
+            .setDuration(150)
+            .setInterpolator(CycleInterpolator(1f))
+            .start()
+        
+        ivPlayerImage.animate()
+            .rotationBy(5f)
+            .setDuration(200)
+            .setInterpolator(CycleInterpolator(1f))
+            .start()
+    }
+
+    private fun playEnemyHitAnimation() {
+        ivEnemyImage.animate()
+            .scaleX(0.9f)
+            .scaleY(0.9f)
+            .setDuration(50)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    ivEnemyImage.animate()
+                        .scaleX(1.1f)
+                        .scaleY(1.1f)
+                        .setDuration(100)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                ivEnemyImage.animate()
+                                    .scaleX(1.0f)
+                                    .scaleY(1.0f)
+                                    .setDuration(100)
+                                    .setListener(null)
+                                    .start()
+                            }
+                        })
+                        .start()
+                }
+            })
+            .start()
+    }
+
+    private fun playPlayerHitAnimation() {
+        ivPlayerImage.animate()
+            .scaleX(0.85f)
+            .scaleY(0.85f)
+            .setDuration(60)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    ivPlayerImage.animate()
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .setDuration(120)
+                        .start()
+                }
+            })
+            .start()
     }
 
     private fun setupObservers() {
@@ -126,7 +254,6 @@ class BattleActivity : AppCompatActivity() {
 
     private fun renderHearts(container: LinearLayout, currentHp: Int, maxHp: Int) {
         container.removeAllViews()
-        // Each heart is now 1 HP
         repeat(maxHp) { index ->
             val heart = ImageView(this)
             val drawable = if (index < currentHp) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
