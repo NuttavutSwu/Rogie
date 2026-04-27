@@ -1,7 +1,7 @@
 package com.rogie.threekingdoms.model
 
 enum class CardType {
-    ATTACK, DEFENSE, SKILL, SPECIAL, TRANSFORMATION
+    ATTACK, DEFENSE, SKILL, SPECIAL, TRANSFORMATION, ULTIMATE
 }
 
 enum class CardRarity {
@@ -10,8 +10,8 @@ enum class CardRarity {
 
 enum class EffectType {
     DAMAGE, BLOCK, BURN_STRIKE, BUFF_STRENGTH, DRAIN, MULTI_HIT,
-    STUN, STEAL, DRAW_CARDS, BLEED, RAGE_BOOST, HEAL, STANCE_CHANGE,
-    EXECUTE, REFLECT, REDUCE_COST, LOW_HP_BUFF, TRANSFORM
+    STUN, STEAL, DRAW_CARDS, BLEED, RAGE_BOOST, HONOR_BOOST, INSIGHT_BOOST, HEAL, STANCE_CHANGE,
+    EXECUTE, REFLECT, REDUCE_COST, LOW_HP_BUFF, TRANSFORM, IMMUNITY, COUNTER, TRAP
 }
 
 data class Card(
@@ -45,6 +45,8 @@ data class Player(
     var energy: Int = 3,
     var strength: Int = 0,
     var rage: Int = 0,
+    var honor: Int = 0,
+    var insight: Int = 0,
     var gold: Int = 0,
     var speed: Int = 10,
     val statuses: MutableList<StatusEffect> = mutableListOf(),
@@ -64,7 +66,8 @@ data class Enemy(
     var block: Int = 0,
     var speed: Int = 8,
     val statuses: MutableList<StatusEffect> = mutableListOf(),
-    var phase: Int = 1
+    var phase: Int = 1,
+    var usedBuffLastTurn: Boolean = false
 )
 
 enum class EquipmentType {

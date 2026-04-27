@@ -150,7 +150,17 @@ object TalentTreeLibrary {
             )
             CharacterId.ZHUGE_LIANG -> listOf(
                 TalentNode("zl_off_1", "Calculated Strike", TalentPath.OFFENSE, "+15% attack.", 2, 0.15),
-                TalentNode("zl_unique_1", "Unlock: Prayer to Stars", TalentPath.UNIQUE_CARD, "Unlock the ultimate strategy card.", 10, rarity = TalentRarity.LEGENDARY),
+                TalentNode("zl_card_fire", "Unlock: Fire Trap Formation", TalentPath.UNIQUE_CARD, "Set AoE fire traps.", 4, rarity = TalentRarity.RARE),
+                TalentNode("zl_card_chain", "Unlock: Chain Strategy", TalentPath.UNIQUE_CARD, "Trigger all traps.", 5, requires = listOf("zl_card_fire"), rarity = TalentRarity.RARE),
+                TalentNode("zl_card_overload", "Unlock: Insight Overload", TalentPath.UNIQUE_CARD, "Burst damage from Insight.", 6, rarity = TalentRarity.RARE),
+                TalentNode("zl_card_eight", "Unlock: Eight Formation Field", TalentPath.UNIQUE_CARD, "Massive damage reduction.", 7, rarity = TalentRarity.RARE),
+                TalentNode("zl_card_wind", "Unlock: Wind Control", TalentPath.UNIQUE_CARD, "Make next attack AoE.", 5, rarity = TalentRarity.RARE),
+                TalentNode("zl_card_delay", "Unlock: Delayed Execution", TalentPath.UNIQUE_CARD, "High damage after 1 turn.", 6, rarity = TalentRarity.RARE),
+                TalentNode("zl_card_master", "Unlock: Master Prediction", TalentPath.UNIQUE_CARD, "Negate enemy action.", 8, rarity = TalentRarity.EPIC),
+                TalentNode("zl_card_recovery", "Unlock: Strategic Recovery", TalentPath.UNIQUE_CARD, "Heal and gain Insight.", 6, rarity = TalentRarity.RARE),
+                TalentNode("zl_card_infinite", "Unlock: Infinite Scheme", TalentPath.UNIQUE_CARD, "Skill cards cost 0.", 10, rarity = TalentRarity.EPIC),
+                TalentNode("zl_card_mastery", "Unlock: Trap Mastery", TalentPath.UNIQUE_CARD, "Buff all traps.", 6, rarity = TalentRarity.RARE),
+                TalentNode("zl_unique_1", "Unlock: Heavenly Strategy", TalentPath.UNIQUE_CARD, "Zhuge Liang's ultimate move.", 15, rarity = TalentRarity.LEGENDARY),
                 TalentNode("zl_def_1", "Field Barriers", TalentPath.DEFENSE, "+1 heart.", 2, 1.0),
                 TalentNode("zl_utl_1", "Foresight", TalentPath.UTILITY, "Draw +1 card each turn.", 2, 1.0)
             )
@@ -167,32 +177,23 @@ object TalentTreeLibrary {
                 TalentNode("zy_utl_1", "Battle Rhythm", TalentPath.UTILITY, "Draw +1 card every other turn.", 2, 1.0)
             )
             CharacterId.LU_BU -> listOf(
-                // Lu Bu Core Stats
                 TalentNode("lb_off_1", "Unmatched Force", TalentPath.OFFENSE, "+25% attack.", 3, 0.25, rarity = TalentRarity.RARE),
                 TalentNode("lb_def_1", "Scarred Veteran", TalentPath.DEFENSE, "+1 heart.", 2, 1.0),
                 TalentNode("lb_utl_1", "Tyrant Charge", TalentPath.UTILITY, "Start with +1 energy.", 2, 1.0),
-
-                // Lu Bu Advanced Card Set Unlocks
                 TalentNode("lb_card_fever", "Unlock: Battle Fever", TalentPath.UNIQUE_CARD, "Gain Rage when playing cards.", 4, rarity = TalentRarity.COMMON),
                 TalentNode("lb_card_halberd", "Unlock: Crushing Halberd", TalentPath.UNIQUE_CARD, "Powerful attack with Stun potential.", 5, requires = listOf("lb_card_fever"), rarity = TalentRarity.RARE),
                 TalentNode("lb_card_overdrive", "Unlock: Overdrive Rage", TalentPath.UNIQUE_CARD, "Double Rage for a massive HP cost.", 6, requires = listOf("lb_card_halberd"), rarity = TalentRarity.EPIC),
-                
                 TalentNode("lb_card_execute", "Unlock: Execution Slash", TalentPath.UNIQUE_CARD, "Instantly kill weak targets.", 5, rarity = TalentRarity.RARE),
                 TalentNode("lb_card_falling", "Unlock: Falling Sky Strike", TalentPath.UNIQUE_CARD, "Massive AoE damage.", 7, requires = listOf("lb_card_execute"), rarity = TalentRarity.EPIC),
-                
                 TalentNode("lb_card_breath", "Unlock: Last Breath", TalentPath.UNIQUE_CARD, "Damage boost when near death.", 5, rarity = TalentRarity.RARE),
                 TalentNode("lb_card_explode", "Unlock: Blood Explosion", TalentPath.UNIQUE_CARD, "Multi-hit strike at HP cost.", 6, requires = listOf("lb_card_breath"), rarity = TalentRarity.RARE),
-                
                 TalentNode("lb_card_mirror", "Unlock: Pain Mirror", TalentPath.UNIQUE_CARD, "Reflect incoming damage.", 5, rarity = TalentRarity.RARE),
                 TalentNode("lb_card_recovery", "Unlock: War Recovery", TalentPath.UNIQUE_CARD, "Heal using your Rage.", 6, requires = listOf("lb_card_mirror"), rarity = TalentRarity.RARE),
-                
                 TalentNode("lb_card_iron", "Unlock: Iron Body", TalentPath.UNIQUE_CARD, "Ultimate defense at the cost of attack.", 5, rarity = TalentRarity.RARE),
                 TalentNode("lb_card_chain", "Unlock: Chain Assault", TalentPath.UNIQUE_CARD, "Repeating attack combo.", 6, requires = listOf("lb_card_iron"), rarity = TalentRarity.RARE),
-                
                 TalentNode("lb_card_fury", "Unlock: Relentless Fury", TalentPath.UNIQUE_CARD, "Free cards on kills.", 8, requires = listOf("lb_card_chain"), rarity = TalentRarity.EPIC),
                 TalentNode("lb_card_momentum", "Unlock: War Momentum", TalentPath.UNIQUE_CARD, "Energy reduction combo.", 6, rarity = TalentRarity.RARE),
                 TalentNode("lb_card_instinct", "Unlock: Demonic Instinct", TalentPath.UNIQUE_CARD, "Guaranteed criticals at low HP.", 7, requires = listOf("lb_card_momentum"), rarity = TalentRarity.RARE),
-                
                 TalentNode("lb_card_transform", "Unlock: Rage Incarnate", TalentPath.UNIQUE_CARD, "Lü Bu's ultimate transformation.", 15, requires = listOf("lb_card_overdrive", "lb_card_falling", "lb_card_instinct"), rarity = TalentRarity.LEGENDARY)
             )
         }

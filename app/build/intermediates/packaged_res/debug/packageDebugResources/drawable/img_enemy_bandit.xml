@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <path
+        android:fillColor="#11000000"
+        android:pathData="M100,280m-60,0a60,20 0,1 1,120 0a60,20 0,1 1,-120 0" />
+    <!-- Bandit Body -->
+    <path
+        android:fillColor="#4E342E"
+        android:pathData="M70,110 L130,110 L145,280 L55,280 Z" />
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M85,60 L115,60 L120,105 L80,105 Z" />
+    <!-- Tattered Hood -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M75,65 L125,65 L115,40 L85,40 Z" />
+    <!-- Dual Daggers -->
+    <path
+        android:strokeColor="#757575"
+        android:strokeWidth="3"
+        android:pathData="M50,150 L30,180 M150,150 L170,180" />
+</vector>

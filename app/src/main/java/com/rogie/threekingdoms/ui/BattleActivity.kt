@@ -39,6 +39,8 @@ class BattleActivity : AppCompatActivity() {
     private lateinit var llEnemyHearts: LinearLayout
     private lateinit var ivPlayerImage: ImageView
     private lateinit var ivEnemyImage: ImageView
+    private lateinit var tvHonorCount: TextView
+    private lateinit var tvRageCount: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +76,8 @@ class BattleActivity : AppCompatActivity() {
         llEnemyHearts = findViewById(R.id.llEnemyHearts)
         ivPlayerImage = findViewById(R.id.ivPlayerImage)
         ivEnemyImage = findViewById(R.id.ivEnemyImage)
+        tvHonorCount = findViewById(R.id.tvHonorCount)
+        tvRageCount = findViewById(R.id.tvRageCount)
     }
 
     private fun setVisuals() {
@@ -93,6 +97,20 @@ class BattleActivity : AppCompatActivity() {
             else -> R.drawable.img_enemy_generic
         }
         ivEnemyImage.setImageResource(enemyRes)
+
+        // Only show Honor for Guan Yu
+        if (GameSession.selectedCharacter == CharacterId.GUAN_YU) {
+            tvHonorCount.visibility = View.VISIBLE
+        } else {
+            tvHonorCount.visibility = View.GONE
+        }
+
+        // Only show Rage for Lu Bu
+        if (GameSession.selectedCharacter == CharacterId.LU_BU) {
+            tvRageCount.visibility = View.VISIBLE
+        } else {
+            tvRageCount.visibility = View.GONE
+        }
     }
 
     private fun setupRecycler() {
@@ -247,6 +265,9 @@ class BattleActivity : AppCompatActivity() {
         tvCharacterStats.text = viewModel.characterStatsText()
         tvEnergy.text = viewModel.playerEnergyText()
         tvGold.text = "Gold: ${viewModel.playerGoldText()}"
+        
+        tvHonorCount.text = "Honor: ${GameSession.player.honor}"
+        tvRageCount.text = "Rage: ${GameSession.player.rage}"
         
         renderHearts(llPlayerHearts, viewModel.playerHpValue(), viewModel.playerMaxHpValue())
         renderHearts(llEnemyHearts, viewModel.enemyHpValue(), viewModel.enemyMaxHpValue())

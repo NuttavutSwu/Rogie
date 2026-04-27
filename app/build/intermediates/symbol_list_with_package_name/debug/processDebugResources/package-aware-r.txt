@@ -3066,6 +3066,9 @@ drawable img_character_guanyu
 drawable img_character_lubu
 drawable img_character_zhouyu
 drawable img_character_zhugeliang
+drawable img_enemy_army
+drawable img_enemy_bandit
+drawable img_enemy_general
 drawable img_enemy_generic
 drawable indeterminate_static
 drawable m3_avd_hide_password
@@ -3676,6 +3679,8 @@ id tvEnemyName
 id tvEnergy
 id tvFactionSymbol
 id tvGold
+id tvHonorCount
+id tvInsightCount
 id tvInvTitle
 id tvMetaPoints
 id tvName
@@ -3686,6 +3691,7 @@ id tvNodeState
 id tvPassive
 id tvPlayerHp
 id tvPointsEarned
+id tvRageCount
 id tvResult
 id tvRewardCard1
 id tvRewardCard2

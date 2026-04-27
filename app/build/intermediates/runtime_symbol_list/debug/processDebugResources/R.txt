@@ -3065,6 +3065,9 @@ int drawable img_character_guanyu 0x7f0700a7
 int drawable img_character_lubu 0x7f0700a8
 int drawable img_character_zhouyu 0x7f0700a9
 int drawable img_character_zhugeliang 0x7f0700aa
+int drawable img_enemy_army 0x7f070104
+int drawable img_enemy_bandit 0x7f070105
+int drawable img_enemy_general 0x7f070106
 int drawable img_enemy_generic 0x7f0700ab
 int drawable indeterminate_static 0x7f0700ac
 int drawable m3_avd_hide_password 0x7f0700ad
@@ -3675,6 +3678,8 @@ int id tvEnemyName 0x7f080203
 int id tvEnergy 0x7f080204
 int id tvFactionSymbol 0x7f080205
 int id tvGold 0x7f080206
+int id tvHonorCount 0x7f080246
+int id tvInsightCount 0x7f080248
 int id tvInvTitle 0x7f080244
 int id tvMetaPoints 0x7f080207
 int id tvName 0x7f080208
@@ -3685,6 +3690,7 @@ int id tvNodeState 0x7f08020c
 int id tvPassive 0x7f08020d
 int id tvPlayerHp 0x7f08020e
 int id tvPointsEarned 0x7f08020f
+int id tvRageCount 0x7f080247
 int id tvResult 0x7f080236
 int id tvRewardCard1 0x7f080210
 int id tvRewardCard2 0x7f080211

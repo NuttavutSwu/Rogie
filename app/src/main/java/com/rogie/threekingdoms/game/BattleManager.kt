@@ -26,6 +26,8 @@ class BattleManager(
         player.energy = player.baseEnergy
         player.block = 0
         player.strength = 0
+        player.honor = 0
+        player.rage = 0
         enemyStrength = 0
         playedTags.clear()
         player.statuses.clear()
@@ -64,12 +66,17 @@ class BattleManager(
 
         val log = when (card.effect) {
             EffectType.DAMAGE -> {
-                val bonus = if (GameSession.selectedCharacter == CharacterId.GUAN_YU && card.tags.contains("[Slash]")) 1 else 0
-                val dealt = dealDamageToEnemy(card.value + player.strength + bonus)
+                var dmg = card.value + player.strength
+                if (GameSession.selectedCharacter == CharacterId.GUAN_YU) {
+                    if (card.tags.contains("[Slash]") && player.honor >= 2) dmg += 1
+                }
+                val dealt = dealDamageToEnemy(dmg)
                 "${card.name} dealt $dealt damage."
             }
             EffectType.BLOCK -> {
-                player.block += card.value
+                var blockVal = card.value
+                if (card.name == "Honor Shield") blockVal = player.honor * 1 // Scaled for hardcore
+                player.block += blockVal
                 "${card.name} raised defenses."
             }
             EffectType.BURN_STRIKE -> {
@@ -87,8 +94,28 @@ class BattleManager(
                 player.hp = minOf(player.maxHp, player.hp + 1)
                 "Drained 1 HP."
             }
+            EffectType.HONOR_BOOST -> {
+                player.honor += card.value
+                "Honor increased by ${card.value}."
+            }
+            EffectType.RAGE_BOOST -> {
+                player.rage += card.value
+                "Rage increased by ${card.value}."
+            }
+            EffectType.HEAL -> {
+                player.hp = minOf(player.maxHp, player.hp + card.value)
+                if (card.name == "Loyal Resolve" && player.honor >= 3) deckManager.drawCards(1)
+                "Healed ${card.value} HP."
+            }
+            EffectType.EXECUTE -> {
+                var actualDmg = card.value + player.strength
+                val dealt = dealDamageToEnemy(actualDmg)
+                "${card.name} executed for $dealt damage."
+            }
             else -> "Played ${card.name}."
         }
+        
+        deckManager.removeFromHand(card)
         
         return if (comboLog.isNotEmpty()) "$log\nCOMBO: $comboLog" else log
     }
@@ -97,23 +124,15 @@ class BattleManager(
         val last3 = playedTags.takeLast(3)
         val last2 = playedTags.takeLast(2)
 
-        // [Slash] -> [Slash] -> [Heavy] = Finisher
-        if (last3 == listOf("[Slash]", "[Slash]", "[Slash]")) { // Simplified for demo
-            dealDamageToEnemy(3)
+        if (last3 == listOf("[Slash]", "[Slash]", "[Heavy]")) {
+            dealDamageToEnemy(2)
             playedTags.clear()
-            return "FINISHER! Massive damage dealt."
+            return "FINISHER! Extra 2 damage."
         }
 
-        // [Fire] -> [Wind] = Burn Spread
         if (last2 == listOf("[Fire]", "[Wind]")) {
             enemy.statuses.add(StatusEffect(EffectType.BURN_STRIKE, 4, 1))
             return "INFERNO! Burn increased."
-        }
-
-        // [Strategy] -> [Strategy] = Prep
-        if (last2 == listOf("[Strategy]", "[Strategy]")) {
-            player.energy = minOf(player.baseEnergy, player.energy + 1)
-            return "PREPARATION! Gained 1 Energy."
         }
 
         return ""
@@ -133,7 +152,7 @@ class BattleManager(
         val log = executeEnemyAI()
         player.block = 0
         player.energy = player.baseEnergy
-        playedTags.clear() // Reset combo on turn end
+        playedTags.clear() 
         deckManager.drawCards(5 + GameSession.drawBonusPerTurn)
         return log
     }

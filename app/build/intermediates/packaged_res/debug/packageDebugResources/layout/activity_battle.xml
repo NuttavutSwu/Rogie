@@ -41,7 +41,7 @@
             android:ellipsize="end" />
     </LinearLayout>
 
-    <!-- Combat Visual Area - Adjusted margin top to 60dp to move everything little upper -->
+    <!-- Combat Visual Area -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/combatArea"
         android:layout_width="0dp"
@@ -85,6 +85,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" />
+
+            <!-- Honor Badge -->
+            <TextView
+                android:id="@+id/tvHonorCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#2E7D32"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:text="Honor: 0"
+                android:textColor="@android:color/white"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <!-- Rage Badge -->
+            <TextView
+                android:id="@+id/tvRageCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#C62828"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:text="Rage: 0"
+                android:textColor="@android:color/white"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <!-- Insight Badge -->
+            <TextView
+                android:id="@+id/tvInsightCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#1976D2"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:text="Insight: 0"
+                android:textColor="@android:color/white"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
 
         <!-- Enemy Side -->
@@ -154,7 +199,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="#BDBDBD"
-        android:textSize="10sp"
+        android:textSize="9sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/combatArea" />
