@@ -11,7 +11,7 @@ enum class CardRarity {
 enum class EffectType {
     DAMAGE, BLOCK, BURN_STRIKE, BUFF_STRENGTH, DRAIN, MULTI_HIT,
     STUN, STEAL, DRAW_CARDS, BLEED, RAGE_BOOST, HONOR_BOOST, INSIGHT_BOOST, HEAL, STANCE_CHANGE,
-    EXECUTE, REFLECT, REDUCE_COST, LOW_HP_BUFF, TRANSFORM, IMMUNITY, COUNTER, TRAP
+    EXECUTE, REFLECT, REDUCE_COST, LOW_HP_BUFF, TRANSFORM, IMMUNITY, COUNTER, TRAP, RELIC_PROC
 }
 
 data class Card(
@@ -24,6 +24,15 @@ data class Card(
     val value: Int,
     val rarity: CardRarity = CardRarity.COMMON,
     val tags: List<String> = emptyList()
+)
+
+data class Relic(
+    val id: String,
+    val name: String,
+    val description: String,
+    val effect: EffectType,
+    val value: Int = 0,
+    val iconResId: Int? = null
 )
 
 enum class Faction {
@@ -50,6 +59,7 @@ data class Player(
     var gold: Int = 0,
     var speed: Int = 10,
     val statuses: MutableList<StatusEffect> = mutableListOf(),
+    val relics: MutableList<Relic> = mutableListOf(),
     var weapon: Equipment? = null,
     var armor: Equipment? = null,
     var mount: Equipment? = null,

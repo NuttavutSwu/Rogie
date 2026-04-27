@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_dark">
 
-    <!-- Top Bar: Gold and Log Only -->
+    <!-- Top Bar: Gold and Log -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -46,7 +46,7 @@
         android:id="@+id/combatArea"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar">
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" />
 
-            <!-- Honor Badge -->
+            <!-- Badges -->
             <TextView
                 android:id="@+id/tvHonorCount"
                 android:layout_width="wrap_content"
@@ -101,7 +101,6 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
-            <!-- Rage Badge -->
             <TextView
                 android:id="@+id/tvRageCount"
                 android:layout_width="wrap_content"
@@ -116,7 +115,6 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
-            <!-- Insight Badge -->
             <TextView
                 android:id="@+id/tvInsightCount"
                 android:layout_width="wrap_content"
@@ -203,6 +201,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/combatArea" />
+
+    <!-- Relic Section (Above Hand) -->
+    <LinearLayout
+        android:id="@+id/llRelicContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/rvHand">
+
+        <TextView
+            android:id="@+id/tvRelicDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#BDBDBD"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            android:paddingHorizontal="16dp"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/llRelics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </LinearLayout>
 
     <!-- Hand Area -->
     <androidx.recyclerview.widget.RecyclerView

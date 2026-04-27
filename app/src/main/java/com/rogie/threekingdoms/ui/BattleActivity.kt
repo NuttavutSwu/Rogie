@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.CycleInterpolator
@@ -23,6 +24,7 @@ import com.rogie.threekingdoms.meta.CharacterId
 import com.rogie.threekingdoms.meta.CharacterLibrary
 import com.rogie.threekingdoms.meta.MetaProgressionManager
 import com.rogie.threekingdoms.model.CardType
+import com.rogie.threekingdoms.model.Relic
 
 class BattleActivity : AppCompatActivity() {
     private val viewModel: BattleViewModel by viewModels()
@@ -41,6 +43,9 @@ class BattleActivity : AppCompatActivity() {
     private lateinit var ivEnemyImage: ImageView
     private lateinit var tvHonorCount: TextView
     private lateinit var tvRageCount: TextView
+    private lateinit var tvInsightCount: TextView
+    private lateinit var llRelics: LinearLayout
+    private lateinit var tvRelicDescription: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +83,9 @@ class BattleActivity : AppCompatActivity() {
         ivEnemyImage = findViewById(R.id.ivEnemyImage)
         tvHonorCount = findViewById(R.id.tvHonorCount)
         tvRageCount = findViewById(R.id.tvRageCount)
+        tvInsightCount = findViewById(R.id.tvInsightCount)
+        llRelics = findViewById(R.id.llRelics)
+        tvRelicDescription = findViewById(R.id.tvRelicDescription)
     }
 
     private fun setVisuals() {
@@ -98,19 +106,9 @@ class BattleActivity : AppCompatActivity() {
         }
         ivEnemyImage.setImageResource(enemyRes)
 
-        // Only show Honor for Guan Yu
-        if (GameSession.selectedCharacter == CharacterId.GUAN_YU) {
-            tvHonorCount.visibility = View.VISIBLE
-        } else {
-            tvHonorCount.visibility = View.GONE
-        }
-
-        // Only show Rage for Lu Bu
-        if (GameSession.selectedCharacter == CharacterId.LU_BU) {
-            tvRageCount.visibility = View.VISIBLE
-        } else {
-            tvRageCount.visibility = View.GONE
-        }
+        tvHonorCount.visibility = if (GameSession.selectedCharacter == CharacterId.GUAN_YU) View.VISIBLE else View.GONE
+        tvRageCount.visibility = if (GameSession.selectedCharacter == CharacterId.LU_BU) View.VISIBLE else View.GONE
+        tvInsightCount.visibility = if (GameSession.selectedCharacter == CharacterId.ZHUGE_LIANG) View.VISIBLE else View.GONE
     }
 
     private fun setupRecycler() {
@@ -171,10 +169,10 @@ class BattleActivity : AppCompatActivity() {
 
     private fun playEnemyAttackAnimation(onStrike: () -> Unit) {
         val originalX = ivEnemyImage.translationX
-        val distance = (ivPlayerImage.x - ivEnemyImage.x) * 0.7f
+        val distance = (ivEnemyImage.x - ivPlayerImage.x) * 0.7f
 
         ivEnemyImage.animate()
-            .translationXBy(distance)
+            .translationXBy(-distance)
             .setDuration(300)
             .setInterpolator(AccelerateDecelerateInterpolator())
             .setListener(object : AnimatorListenerAdapter() {
@@ -268,9 +266,31 @@ class BattleActivity : AppCompatActivity() {
         
         tvHonorCount.text = "Honor: ${GameSession.player.honor}"
         tvRageCount.text = "Rage: ${GameSession.player.rage}"
+        tvInsightCount.text = "Insight: ${GameSession.player.insight}"
         
         renderHearts(llPlayerHearts, viewModel.playerHpValue(), viewModel.playerMaxHpValue())
         renderHearts(llEnemyHearts, viewModel.enemyHpValue(), viewModel.enemyMaxHpValue())
+        renderRelics()
+    }
+
+    private fun renderRelics() {
+        llRelics.removeAllViews()
+        val inflater = LayoutInflater.from(this)
+        GameSession.player.relics.forEach { relic ->
+            val view = inflater.inflate(R.layout.item_relic, llRelics, false)
+            view.setOnClickListener {
+                tvRelicDescription.text = "${relic.name}: ${relic.description}"
+                tvRelicDescription.visibility = View.VISIBLE
+                // Reset any existing hides and set a new one
+                view.removeCallbacks(hideRelicDescRunnable)
+                view.postDelayed(hideRelicDescRunnable, 3000)
+            }
+            llRelics.addView(view)
+        }
+    }
+
+    private val hideRelicDescRunnable = Runnable {
+        tvRelicDescription.visibility = View.INVISIBLE
     }
 
     private fun renderHearts(container: LinearLayout, currentHp: Int, maxHp: Int) {
@@ -290,14 +310,14 @@ class BattleActivity : AppCompatActivity() {
     private fun processBattleState() {
         if (viewModel.battleEnded.value == true) {
             if (GameSession.player.hp <= 0) {
-                val earned = (GameSession.enemiesDefeated * 2) + (GameSession.bossesDefeated * 15) + (GameSession.chapterReached * 5)
+                val earned = (GameSession.enemiesDefeated * 2) + (GameSession.bossesDefeated * 15) + (GameSession.currentChapter * 5)
                 MetaProgressionManager.addSkillPoints(this, earned)
                 startActivity(
                     Intent(this, DeathSummaryActivity::class.java)
                         .putExtra("earned_points", earned)
                         .putExtra("enemies_defeated", GameSession.enemiesDefeated)
                         .putExtra("bosses_defeated", GameSession.bossesDefeated)
-                        .putExtra("chapter_reached", GameSession.chapterReached)
+                        .putExtra("chapter_reached", GameSession.currentChapter)
                 )
                 finish()
                 return

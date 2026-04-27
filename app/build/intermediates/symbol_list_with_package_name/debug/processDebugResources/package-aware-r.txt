@@ -3059,8 +3059,13 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_relic_dragon
+drawable ic_relic_seal
 drawable ic_seal_signature
 drawable ic_search_black_24
+drawable img_boss_cursed_beast
+drawable img_boss_fallen_guardian
+drawable img_boss_spirit_guardian
 drawable img_character_caocao
 drawable img_character_guanyu
 drawable img_character_lubu
@@ -3398,6 +3403,7 @@ id ivEnemyImage
 id ivMount
 id ivPlayerImage
 id ivPortrait
+id ivRelicIcon
 id ivTreasure
 id ivWeapon
 id jumpToEnd
@@ -3417,6 +3423,9 @@ id llEnemyInfo
 id llOptionsContainer
 id llPlayerHearts
 id llPlayerInfo
+id llRelicChoices
+id llRelicContainer
+id llRelics
 id llTalentNodes
 id m3_side_sheet
 id marquee
@@ -3685,6 +3694,7 @@ id tvInvTitle
 id tvMetaPoints
 id tvName
 id tvNameLabel
+id tvNewRelicInfo
 id tvNodeInfo
 id tvNodeRarity
 id tvNodeState
@@ -3692,6 +3702,7 @@ id tvPassive
 id tvPlayerHp
 id tvPointsEarned
 id tvRageCount
+id tvRelicDescription
 id tvResult
 id tvRewardCard1
 id tvRewardCard2
@@ -3868,10 +3879,12 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialog_relic_replace
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_card
 layout item_character_portrait
+layout item_relic
 layout item_talent_node
 layout layout_equipment
 layout m3_alert_dialog

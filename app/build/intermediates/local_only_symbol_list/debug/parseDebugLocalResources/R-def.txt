@@ -44,7 +44,12 @@ drawable ic_heart_empty
 drawable ic_heart_full
 drawable ic_heart_half
 drawable ic_inventory
+drawable ic_relic_dragon
+drawable ic_relic_seal
 drawable ic_seal_signature
+drawable img_boss_cursed_beast
+drawable img_boss_fallen_guardian
+drawable img_boss_spirit_guardian
 drawable img_character_caocao
 drawable img_character_guanyu
 drawable img_character_lubu
@@ -76,6 +81,7 @@ id ivEnemyImage
 id ivMount
 id ivPlayerImage
 id ivPortrait
+id ivRelicIcon
 id ivTreasure
 id ivWeapon
 id llEnemyHearts
@@ -83,6 +89,9 @@ id llEnemyInfo
 id llOptionsContainer
 id llPlayerHearts
 id llPlayerInfo
+id llRelicChoices
+id llRelicContainer
+id llRelics
 id llTalentNodes
 id menuPanel
 id rlCardRoot
@@ -114,6 +123,7 @@ id tvInvTitle
 id tvMetaPoints
 id tvName
 id tvNameLabel
+id tvNewRelicInfo
 id tvNodeInfo
 id tvNodeRarity
 id tvNodeState
@@ -121,6 +131,7 @@ id tvPassive
 id tvPlayerHp
 id tvPointsEarned
 id tvRageCount
+id tvRelicDescription
 id tvResult
 id tvRewardCard1
 id tvRewardCard2
@@ -144,8 +155,10 @@ layout activity_main_menu
 layout activity_reward
 layout activity_skill_tree
 layout activity_story
+layout dialog_relic_replace
 layout item_card
 layout item_character_portrait
+layout item_relic
 layout item_talent_node
 layout layout_equipment
 string app_name

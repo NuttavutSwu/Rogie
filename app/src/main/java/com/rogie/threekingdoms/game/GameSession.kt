@@ -15,12 +15,24 @@ object GameSession {
     var inventory: MutableList<Equipment> = mutableListOf()
     lateinit var selectedCharacter: CharacterId
     var selectedTalents: Set<String> = emptySet()
+    
+    // --- Story & Progression Stats ---
+    var chaosLevel: Int = 0
+    var honorLevel: Int = 0
+    var spareCount: Int = 0
+    var executeCount: Int = 0
+    var secretBossesDefeated: Int = 0
+    var currentChapter: Int = 1
     var encounterCount: Int = 0
-    var hasImperialSeal: Boolean = false
+    var isMainStoryEvent: Boolean = true
+    var lastBossDefeatedId: String? = null
+    
     var enemiesDefeated: Int = 0
     var bossesDefeated: Int = 0
-    var chapterReached: Int = 1
     var pendingUnlock: CharacterId? = null
+    var hasImperialSeal: Boolean = false
+    
+    // Multipliers
     var attackMultiplier: Double = 1.0
     var critDamageMultiplier: Double = 1.5
     var critChance: Double = 0.1
@@ -50,13 +62,23 @@ object GameSession {
         player.speed = selected.speed
         deck = CardLibrary.starterDeck(selected.id).toMutableList()
         inventory = mutableListOf()
+        
+        // Reset Progression
+        chaosLevel = 0
+        honorLevel = 0
+        spareCount = 0
+        executeCount = 0
+        secretBossesDefeated = 0
+        currentChapter = 1
         encounterCount = 0
-        hasImperialSeal = false
+        isMainStoryEvent = true
+        lastBossDefeatedId = null
+        
         enemiesDefeated = 0
         bossesDefeated = 0
-        chapterReached = 1
         pendingUnlock = null
         nextForcedEnemy = null
+        hasImperialSeal = false
 
         attackMultiplier = 1.0
         critDamageMultiplier = 1.5
@@ -89,6 +111,11 @@ object GameSession {
         enemiesDefeated++
         if (enemy.isBoss) {
             bossesDefeated++
+            lastBossDefeatedId = enemy.id
+            isMainStoryEvent = true // Trigger Spare/Execute dialog
+            if (enemy.id.startsWith("SECRET")) secretBossesDefeated++
+            
+            // Standard Unlocks
             if (enemy.id == "BOSS_LU_BU") pendingUnlock = CharacterId.LU_BU
             if (enemy.id == "BOSS_CAO_CAO") pendingUnlock = CharacterId.CAO_CAO
             if (enemy.id == "BOSS_ZHOU_YU") pendingUnlock = CharacterId.ZHOU_YU
@@ -107,23 +134,38 @@ object GameSession {
         }
 
         encounterCount++
-        chapterReached = maxOf(chapterReached, ((encounterCount - 1) / 5) + 1)
+        // Final Chapter logic
+        if (currentChapter >= 5) {
+            return buildFinalBoss(1.0 + (encounterCount * 0.15))
+        }
+
         val isBoss = encounterCount % 5 == 0
         val scale = 1.0 + (encounterCount * 0.15)
         
         return if (isBoss) {
-            when (Random.nextInt(4)) {
-                0 -> Enemy("BOSS_LU_BU", "Lu Bu (Overlord)", (15 * scale).toInt(), (15 * scale).toInt(), (2 * scale).toInt(), isBoss = true, speed = 15)
-                1 -> Enemy("BOSS_DONG_ZHUO", "Dong Zhuo (Tyrant)", (18 * scale).toInt(), (18 * scale).toInt(), (1 * scale).toInt(), isBoss = true, speed = 8)
-                2 -> Enemy("BOSS_YUAN_SHAO", "Yuan Shao (Noble)", (16 * scale).toInt(), (16 * scale).toInt(), (1 * scale).toInt(), isBoss = true, speed = 11)
-                else -> Enemy("BOSS_CAO_CAO", "Cao Cao (Hero of Chaos)", (14 * scale).toInt(), (14 * scale).toInt(), (2 * scale).toInt(), isBoss = true, speed = 12)
+            when (currentChapter) {
+                1 -> Enemy("CORRUPTED_GENERAL", "แม่ทัพผู้แปดเปื้อน", (10 * scale).toInt(), (10 * scale).toInt(), 1, isBoss = true, speed = 10)
+                2 -> Enemy("FLAME_WARLORD", "ขุนพลอัคคี", (12 * scale).toInt(), (12 * scale).toInt(), 1, isBoss = true, speed = 12)
+                3 -> Enemy("ILLUSION_KEEPER", "ผู้พิทักษ์ภาพลวงตา", (14 * scale).toInt(), (14 * scale).toInt(), 1, isBoss = true, speed = 13)
+                else -> Enemy("BOSS_LU_BU", "ลิโป้ จอมราชันย์ล่มสลาย", (18 * scale).toInt(), (18 * scale).toInt(), 2, isBoss = true, speed = 15)
             }
         } else {
             when (Random.nextInt(3)) {
-                0 -> Enemy("BANDITS", "Bandit Raiders", (5 * scale).toInt(), (5 * scale).toInt(), (1 * scale).toInt(), speed = 9)
-                1 -> Enemy("RIVAL_GENERAL", "Rival General", (6 * scale).toInt(), (6 * scale).toInt(), (1 * scale).toInt(), speed = 11)
-                else -> Enemy("ARMY", "Vanguard Force", (8 * scale).toInt(), (8 * scale).toInt(), (1 * scale).toInt(), speed = 10)
+                0 -> Enemy("BANDITS", "Bandit Raiders", (3 * scale).toInt(), (3 * scale).toInt(), 1, speed = 9)
+                1 -> Enemy("RIVAL_GENERAL", "Rival General", (4 * scale).toInt(), (4 * scale).toInt(), 1, speed = 11)
+                else -> Enemy("ARMY", "Vanguard Force", (5 * scale).toInt(), (5 * scale).toInt(), 1, speed = 10)
             }
+        }
+    }
+
+    private fun buildFinalBoss(scale: Double): Enemy {
+        return when {
+            spareCount >= 3 && secretBossesDefeated >= 2 -> 
+                Enemy("TRUE_BOSS_DRAGON", "มังกรแห่งโชคชะตา", (25 * scale).toInt(), (25 * scale).toInt(), 2, isBoss = true, speed = 20)
+            spareCount > executeCount -> 
+                Enemy("FALLEN_GUARDIAN", "ผู้พิทักษ์ที่ร่วงหล่น", (20 * scale).toInt(), (20 * scale).toInt(), 1, isBoss = true, speed = 15)
+            else -> 
+                Enemy("CHAOS_INCARNATE", "อวตารแห่งความบ้าคลั่ง", (22 * scale).toInt(), (22 * scale).toInt(), 2, isBoss = true, speed = 18)
         }
     }
 
@@ -143,64 +185,21 @@ object GameSession {
             when (talentId) {
                 "gy_off_1" -> attackMultiplier += 0.20
                 "gy_off_2" -> critDamageMultiplier = 2.0
-                "gy_off_3" -> energyOnKill += 1
                 "gy_def_1" -> player.maxHp += 1
                 "gy_def_2" -> extraStartBlock += 1
-                "gy_def_3" -> damageReduction += 0.10
                 "gy_utl_1" -> player.baseEnergy += 1
-                "gy_utl_2" -> drawBonusPerTurn += 1
-                "gy_utl_3" -> bonusGoldPerVictory += 10
-                "gy_utl_4" -> firstAttackBonusPerTurn += 0.25
-
                 "zl_off_1" -> attackMultiplier += 0.15
-                "zl_off_2" -> strategyMultiplier += 0.25
-                "zl_off_3" -> critChance += 0.10
                 "zl_def_1" -> player.maxHp += 1
-                "zl_def_2" -> extraStartBlock += 1
-                "zl_def_3" -> damageReduction += 0.08
                 "zl_utl_1" -> drawBonusPerTurn += 1
-                "zl_utl_2" -> {
-                    skillDiscountEnabled = true
-                    discountOncePerTurn = true
-                }
-                "zl_utl_3" -> strategyMultiplier += 0.30
-                "zl_utl_4" -> player.baseEnergy += 1
-
                 "cc_off_1" -> attackMultiplier += 0.15
-                "cc_off_2" -> attackMultiplier += 0.10
-                "cc_off_3" -> critChance += 0.12
                 "cc_def_1" -> player.maxHp += 1
-                "cc_def_2" -> drainBonusHeal += 1
-                "cc_def_3" -> damageReduction += 0.12
                 "cc_utl_1" -> player.baseEnergy += 1
-                "cc_utl_2" -> bonusGoldPerVictory += 15
-                "cc_utl_3" -> skillDiscountEnabled = true
-                "cc_utl_4" -> attackMultiplier += 0.10
-
                 "zy_off_1" -> strategyMultiplier += 0.20
-                "zy_off_2" -> strategyMultiplier += 0.15
-                "zy_off_3" -> attackMultiplier += 0.10
                 "zy_def_1" -> player.maxHp += 1
-                "zy_def_2" -> extraStartBlock += 1
-                "zy_def_3" -> damageReduction += 0.10
                 "zy_utl_1" -> drawBonusPerTurn += 1
-                "zy_utl_2" -> skillDiscountEnabled = true
-                "zy_utl_3" -> strategyMultiplier += 0.25
-                "zy_utl_4" -> bonusGoldPerVictory += 12
-
                 "lb_off_1" -> attackMultiplier += 0.25
-                "lb_off_2" -> attackMultiplier += 0.15
-                "lb_off_3" -> attackMultiplier += 0.20
                 "lb_def_1" -> player.maxHp += 1
-                "lb_def_2" -> damageReduction += 0.08
-                "lb_def_3" -> extraStartBlock += 1
                 "lb_utl_1" -> player.baseEnergy += 1
-                "lb_utl_2" -> energyOnKill += 1
-                "lb_utl_3" -> bonusGoldPerVictory += 20
-                "lb_utl_4" -> {
-                    attackMultiplier += 0.20
-                    luBuSelfHeartLossStart = true
-                }
             }
         }
         player.energy = player.baseEnergy

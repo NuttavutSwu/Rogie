@@ -17,7 +17,18 @@ class StoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
 
-        val event = StoryLibrary.getRandomEvent()
+        val event = when {
+            GameSession.lastBossDefeatedId != null -> {
+                val bossId = GameSession.lastBossDefeatedId!!
+                GameSession.lastBossDefeatedId = null
+                StoryLibrary.getBossPostChoice(bossId)
+            }
+            GameSession.isMainStoryEvent -> {
+                GameSession.isMainStoryEvent = false
+                StoryLibrary.getChapterStart(GameSession.currentChapter)
+            }
+            else -> StoryLibrary.getMilitaryEncounter()
+        }
         
         findViewById<TextView>(R.id.tvStoryTitle).text = event.title
         findViewById<TextView>(R.id.tvStoryDescription).text = event.description
@@ -31,17 +42,31 @@ class StoryActivity : AppCompatActivity() {
                 text = option.text
                 setOnClickListener {
                     option.onChoice(GameSession.player)
+                    
+                    if (option.isSpare || option.isExecute) {
+                        GameSession.currentChapter++
+                    }
+
                     tvResult.text = option.resultText
                     tvResult.visibility = View.VISIBLE
                     container.visibility = View.GONE
                     btnContinue.visibility = View.VISIBLE
+                    
+                    if (option.triggerFight && option.forcedEnemy != null) {
+                        GameSession.setForcedEnemy(option.forcedEnemy)
+                    }
                 }
             }
             container.addView(button)
         }
 
         btnContinue.setOnClickListener {
-            startActivity(Intent(this, BattleActivity::class.java))
+            if (GameSession.currentChapter > 5) {
+                // Finale logic
+                startActivity(Intent(this, BattleActivity::class.java))
+            } else {
+                startActivity(Intent(this, BattleActivity::class.java))
+            }
             finish()
         }
     }

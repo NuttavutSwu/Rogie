@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <!-- Dark aura -->
+    <path android:fillColor="#11000000" android:pathData="M100,150m-90,0a90,90 0,1 1,180 0a90,90 0,1 1,-180 0" />
+    <!-- Tattered Armor -->
+    <path android:fillColor="#455A64" android:pathData="M70,110 L130,110 L150,280 L50,280 Z" />
+    <path android:fillColor="#37474F" android:pathData="M80,110 L120,110 L125,180 L75,180 Z" />
+    <!-- Wounded Face -->
+    <path android:fillColor="#D7CCC8" android:pathData="M85,50 L115,50 L120,95 L80,95 Z" />
+    <path android:fillColor="#D32F2F" android:pathData="M95,70 L105,70 L100,80 Z" />
+    <!-- Broken Spear -->
+    <path android:strokeColor="#757575" android:strokeWidth="4" android:pathData="M40,50 L60,120" />
+    <path android:strokeColor="#757575" android:strokeWidth="4" android:pathData="M160,200 L180,280" />
+</vector>

@@ -28,6 +28,7 @@ class BattleManager(
         player.strength = 0
         player.honor = 0
         player.rage = 0
+        player.insight = 0
         enemyStrength = 0
         playedTags.clear()
         player.statuses.clear()
@@ -47,7 +48,8 @@ class BattleManager(
             executeEnemyAI()
             isPlayerTurn = true
         }
-        deckManager.drawCards(2 + GameSession.drawBonusPerTurn)
+        // Draw 3 cards initially as requested.
+        deckManager.drawCards(3 + GameSession.drawBonusPerTurn)
     }
 
     fun useSkill(skill: Skill): String {
@@ -75,8 +77,11 @@ class BattleManager(
             }
             EffectType.BLOCK -> {
                 var blockVal = card.value
-                if (card.name == "Honor Shield") blockVal = player.honor * 1 // Scaled for hardcore
+                if (card.name == "Honor Shield") blockVal = player.honor * 1
                 player.block += blockVal
+                if (card.tags.contains("[Counter]")) {
+                    player.statuses.add(StatusEffect(EffectType.COUNTER, 1, 1))
+                }
                 "${card.name} raised defenses."
             }
             EffectType.BURN_STRIKE -> {
@@ -102,15 +107,29 @@ class BattleManager(
                 player.rage += card.value
                 "Rage increased by ${card.value}."
             }
+            EffectType.INSIGHT_BOOST -> {
+                player.insight += card.value
+                "Insight increased by ${card.value}."
+            }
             EffectType.HEAL -> {
                 player.hp = minOf(player.maxHp, player.hp + card.value)
                 if (card.name == "Loyal Resolve" && player.honor >= 3) deckManager.drawCards(1)
                 "Healed ${card.value} HP."
             }
             EffectType.EXECUTE -> {
-                var actualDmg = card.value + player.strength
-                val dealt = dealDamageToEnemy(actualDmg)
+                val dealt = dealDamageToEnemy(card.value + player.strength)
                 "${card.name} executed for $dealt damage."
+            }
+            EffectType.LOW_HP_BUFF -> {
+                if (card.name == "Demonic Instinct") {
+                    player.statuses.add(StatusEffect(EffectType.LOW_HP_BUFF, 2, 1))
+                    "Demonic Instinct active: Guaranteed Criticals!"
+                } else if (card.name == "Last Breath") {
+                    player.statuses.add(StatusEffect(EffectType.BUFF_STRENGTH, 1, 1))
+                    "Last Breath active: Damage increased."
+                } else {
+                    "Buff activated."
+                }
             }
             else -> "Played ${card.name}."
         }
@@ -164,16 +183,45 @@ class BattleManager(
             if (stun.duration <= 0) enemy.statuses.remove(stun)
             return "${enemy.name} is Stunned!"
         }
+
         processStatuses(enemy)
-        if (enemy.hp <= 0) return "Enemy defeated."
-        
-        val dmg = dealDamageToPlayer(enemy.damage)
-        return "${enemy.name} attacks for $dmg."
+        if (enemy.hp <= 0) return "Enemy defeated by status effects."
+
+        return when (enemy.id) {
+            "BANDITS" -> {
+                val dmg = dealDamageToPlayer(1)
+                player.energy = max(0, player.energy - 1)
+                "Bandit Raider deals $dmg and drains 1 Energy!"
+            }
+            "RIVAL_GENERAL" -> {
+                if (Random.nextBoolean()) {
+                    enemyStrength += 1
+                    "Rival General rallies! Strength +1."
+                } else {
+                    val dmg = dealDamageToPlayer(1 + enemyStrength)
+                    "Rival General strikes for $dmg!"
+                }
+            }
+            "ARMY" -> {
+                enemy.block += 2
+                "Vanguard forms a Shield Wall! Block +2."
+            }
+            else -> {
+                val dmg = dealDamageToPlayer(enemy.damage)
+                "${enemy.name} attacks for $dmg."
+            }
+        }
     }
 
     private fun dealDamageToPlayer(rawDamage: Int): Int {
         val incoming = (rawDamage * (1.0 - GameSession.damageReduction)).toInt()
         val actual = max(0, incoming - player.block)
+        
+        if (actual < incoming && player.statuses.any { it.type == EffectType.COUNTER }) {
+            val counterDmg = 1 + player.strength + (player.honor / 2)
+            dealDamageToEnemy(counterDmg)
+        }
+
         player.hp -= actual
         player.block = max(0, player.block - incoming)
         return actual
@@ -194,8 +242,18 @@ class BattleManager(
 
     private fun dealDamageToEnemy(rawDamage: Int): Int {
         var damageMultiplier = GameSession.attackMultiplier
+        
+        var currentCritChance = GameSession.critChance
+        if (player.statuses.any { it.type == EffectType.LOW_HP_BUFF && it.value == 1 }) {
+            currentCritChance = 1.0 
+        }
+        
+        val isCrit = Random.nextDouble() < currentCritChance
+        val critMultiplier = if (isCrit) GameSession.critDamageMultiplier else 1.0
+
         player.statuses.find { it.type == EffectType.RAGE_BOOST }?.let { damageMultiplier += (it.value * 0.5) }
-        val scaledDamage = (rawDamage * damageMultiplier).toInt()
+        
+        val scaledDamage = (rawDamage * damageMultiplier * critMultiplier).toInt()
         val actual = max(0, scaledDamage - enemy.block)
         enemy.hp -= actual
         enemy.block = max(0, enemy.block - scaledDamage)

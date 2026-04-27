@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <!-- Dark fog -->
+    <path android:fillColor="#22000000" android:pathData="M0,200 Q100,150 200,200 L200,300 L0,300 Z" />
+    <!-- Monstrous silhouette -->
+    <path android:fillColor="#212121" android:pathData="M50,150 L150,150 L180,280 L20,280 Z" />
+    <!-- Glowing Red Eyes -->
+    <path android:fillColor="#FF5252" android:pathData="M80,180m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+    <path android:fillColor="#FF5252" android:pathData="M120,180m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+    <!-- Cursed Aura Sparks -->
+    <path android:fillColor="#7B1FA2" android:pathData="M100,100 L105,110 L100,120 L95,110 Z" />
+</vector>

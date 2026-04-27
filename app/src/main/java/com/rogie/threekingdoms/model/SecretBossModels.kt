@@ -1,16 +1,33 @@
 package com.rogie.threekingdoms.model
 
+data class SecretBossReward(
+    val unlockHiddenPaths: Boolean = false,
+    val insightRelic: Boolean = false,
+    val fireResistance: Boolean = false,
+    val controlBuff: Boolean = false,
+    val fireDamageRelic: Boolean = false,
+    val damageRelic: Boolean = false,
+    val healBuff: Boolean = false,
+    val sustainBonus: Boolean = false,
+    val poisonDamage: Boolean = false,
+    val unlockLuBuAlly: Boolean = false,
+    val legendaryWeaponUpgrade: Boolean = false
+)
+
 data class BossDialogue(
     val intro: String,
     val midBattle: String,
     val defeat: String,
-    val playerResponses: List<String>
+    val playerResponses: List<String>,
+    val branchDialogues: Map<Int, String> = emptyMap(),
+    val postChoiceDialogues: Map<String, String> = emptyMap() // "SPARE" or "EXECUTE"
 )
 
 data class SecretBoss(
     val id: String,
     val name: String,
     val title: String,
+    val sceneEntry: String,
     val personality: String,
     val baseHp: Int,
     val baseDamage: Int,
@@ -18,100 +35,123 @@ data class SecretBoss(
     val mechanicDescription: String,
     val unlockCondition: String,
     val loreHint: String,
-    val dialogue: BossDialogue
+    val dialogue: BossDialogue,
+    val spareReward: SecretBossReward,
+    val executeReward: SecretBossReward
 )
 
 object SecretBossLibrary {
     val bosses = listOf(
         SecretBoss(
-            id = "BOSS_QINGLONG",
-            name = "Qinglong",
-            title = "มังกรฟ้าแห่งทิศตะวันออก",
-            personality = "เคร่งขรึม ยึดมั่นในสมดุลและชะตากรรม",
+            id = "SECRET_PHANTOM",
+            name = "Phantom Strategist",
+            title = "เงาแห่งนักปราชญ์",
+            sceneEntry = "ท่านเลือกความเมตตา... แต่ท่านกำลังก้าวเข้าสู่สมรภูมิที่มองไม่เห็น",
+            personality = "ลึกลับและเปี่ยมด้วยปัญญา",
             baseHp = 15,
-            baseDamage = 2,
-            speed = 12,
-            mechanicDescription = "ตาชั่งแห่งสมดุล: ดาเมจที่เกิน 5 ในเทิร์นเดียวจะสะท้อนกลับ",
-            unlockCondition = "จบเกมโดยไม่ทำลายการ์ดเริ่มต้น",
-            loreHint = "เขารอสังหารท่านในทุกกงล้อ เพราะท่านคือตัวตนที่ไม่ควรมีอยู่",
-            dialogue = BossDialogue(
-                intro = "เจ้าเดินสวนทางกับกระแสชะตามานับครั้งไม่ถ้วน... ถึงเวลาต้องหยุดแล้ว",
-                midBattle = "เจ้ายังดิ้นรนในกรงขังที่ชื่อว่า 'เวลา' อีกหรือ?",
-                defeat = "แม้ชะตาจะหักสะบั้น... แต่ความว่างเปล่ายังรอเจ้าอยู่...",
-                playerResponses = listOf("ยอมรับชะตา", "ปฏิเสธชะตา")
-            )
-        ),
-        SecretBoss(
-            id = "BOSS_ZHUQUE",
-            name = "Zhuque",
-            title = "วิหคเพลิงแห่งทิศใต้",
-            personality = "บ้าคลั่ง หลงใหลในการทำลายเพื่อจุติใหม่",
-            baseHp = 12,
-            baseDamage = 2,
-            speed = 14,
-            mechanicDescription = "เพลิงอมตะ: ฟื้นคืนชีพ 50% HP พร้อมเผาไหม้การ์ดในมือผู้เล่น",
-            unlockCondition = "ชนะ 3 ศึกติดต่อกันด้วยเลือดเพียง 1 HP",
-            loreHint = "ทุกครั้งที่ท่านตาย นางคือผู้ที่เก็บเถ้าถ่านวิญญาณของท่านมาหลอมใหม่",
-            dialogue = BossDialogue(
-                intro = "มาเถิด... มาเป็นเชื้อไฟให้กับการจุติใหม่ของข้า!",
-                midBattle = "ความเจ็บปวดคือหลักฐานเดียวว่าเจ้ายังหายใจ!",
-                defeat = "เถ้าถ่าน... จะไม่มีวัน... มอดไหม้...",
-                playerResponses = listOf("กรีดร้องด้วยความเจ็บปวด", "ยืนหยัดในกองเพลิง")
-            )
-        ),
-        SecretBoss(
-            id = "BOSS_BAIHU",
-            name = "Baihu",
-            title = "พยัคฆ์ขาวแห่งทิศตะวันตก",
-            personality = "เพชฌฆาตเงียบ เชี่ยวชาญการสังหาร",
-            baseHp = 14,
-            baseDamage = 3,
-            speed = 15,
-            mechanicDescription = "ลางสังหาร: หากเลือดผู้เล่นต่ำกว่า 40% จะใช้ท่าไม้ตายดาเมจมหาศาล",
-            unlockCondition = "สังหารทหารธรรมดาเกิน 100 ศพ",
-            loreHint = "เขาคือความผิดบาปที่ท่านก่อไว้ในอดีต ที่ตามมาทวงคืนในร่างพยัคฆ์",
-            dialogue = BossDialogue(
-                intro = "บาปของเจ้าหนาเกินกว่าจะเยียวยา... ข้าจะช่วยสงเคราะห์เอง",
-                midBattle = "เจ้าเริ่มช้าลงแล้ว... ข้าเห็นคอของเจ้าชัดขึ้น",
-                defeat = "ดาบที่คมที่สุด... คือดาบที่สังหารความหวัง...",
-                playerResponses = listOf("ยอมรับความผิด", "สู้จนตัวตาย")
-            )
-        ),
-        SecretBoss(
-            id = "BOSS_XUANWU",
-            name = "Xuanwu",
-            title = "เต่าดำแห่งทิศเหนือ",
-            personality = "เยือกเย็น อดทน เป็นดั่งปราการที่ไม่มีวันทลาย",
-            baseHp = 20,
             baseDamage = 1,
-            speed = 5,
-            mechanicDescription = "ปราการนิรันดร์: เปลี่ยนดาเมจที่ได้รับทั้งหมดเป็นเกราะในเทิร์นถัดไป",
-            unlockCondition = "มีเกราะรวมเกิน 50 ในหนึ่งการต่อสู้",
-            loreHint = "ความทรงจำของแผ่นดินถูกเก็บไว้ภายใต้กระดองนี้ รวมถึงความจริงที่ท่านลืมไป",
+            speed = 12,
+            mechanicDescription = "กลลวงตา: สลับการ์ดในมือทุก 3 เทิร์น",
+            unlockCondition = "บทที่ 1: สำรวจซากปรักหักพัง และ ไว้ชีวิตบอส",
+            loreHint = "กลยุทธ์ที่ไร้ซึ่งความเข้าใจคือความว่างเปล่า",
             dialogue = BossDialogue(
-                intro = "กาลเวลาไม่มีความหมายต่อหน้าข้า... ความพยายามของเจ้าก็เช่นกัน",
-                midBattle = "ภูผาไม่สั่นคลอนเพราะลมพัด ดาบของเจ้าก็เป็นเพียงสายลม",
-                defeat = "นิรันดร์กาล... กำลังจะสิ้นสุดลงหรือ...",
-                playerResponses = listOf("ทำลายกระดอง", "รอคอยอย่างอดทน")
-            )
+                intro = "ท่านเชื่อจริงๆ หรือว่าการไว้ชีวิตคนเพียงคนเดียวจะช่วยคนได้มากมาย? หรือมันเป็นเพียงการประวิงเวลาแห่งความโกลาหล?",
+                midBattle = "กลยุทธ์ที่ไร้ซึ่งความเข้าใจคือความว่างเปล่า",
+                defeat = "ดูเหมือนท่านจะมีความเข้าใจมากกว่าที่ข้าคิด...",
+                playerResponses = listOf("ข้าแสวงหาสมดุล", "ข้าจะยุติความโกลาหลด้วยกำลัง"),
+                branchDialogues = mapOf(0 to "งั้นจงพิสูจน์ปัญญาของท่าน", 1 to "งั้นท่านก็ไม่ต่างจากคนอื่น"),
+                postChoiceDialogues = mapOf("SPARE" to "ไม่ใช่อุบายทุกอย่างที่ต้องการชัยชนะ", "EXECUTE" to "แม้แต่ปัญญาก็พ่ายแพ้ต่อคมดาบ")
+            ),
+            spareReward = SecretBossReward(unlockHiddenPaths = true, insightRelic = true),
+            executeReward = SecretBossReward(damageRelic = true)
         ),
         SecretBoss(
-            id = "BOSS_TAOTIE",
-            name = "Taotie",
-            title = "อสูรตะกละผู้กลืนกินแสง",
-            personality = "หิวโหยตลอดเวลา ไร้ก้นบึ้ง",
-            baseHp = 18,
+            id = "SECRET_QILIN",
+            name = "Infernal Qilin",
+            title = "กิเลนอเวจี",
+            sceneEntry = "ท่านหล่อเลี้ยงเพลิงแห่งสงคราม... บัดนี้จงเผชิญหน้ากับมัน",
+            personality = "ดุร้ายและทรงพลัง",
+            baseHp = 20,
             baseDamage = 2,
             speed = 8,
-            mechanicDescription = "ความหิวโหยไม่สิ้นสุด: เพิ่มพลังโจมตีตามจำนวนไอเทมที่ผู้เล่นมี",
-            unlockCondition = "สะสมทองเกิน 200 โดยไม่ใช้จ่าย",
-            loreHint = "ความโลภของมนุษย์หล่อเลี้ยงมัน และท่านคืออาหารที่หอมหวานที่สุด",
+            mechanicDescription = "เพลิงอเวจี: สะท้อนดาเมจเป็นสถานะ Burn",
+            unlockCondition = "บทที่ 2: สังหารบอสก่อนหน้า และ Chaos >= 2",
+            loreHint = "แม้แต่ไฟก็มอดดับได้",
             dialogue = BossDialogue(
-                intro = "เจ้ามาเพื่อเติมเต็มความหิวโหยของข้าหรือ?",
-                midBattle = "ข้ายังไม่อิ่ม... ข้าต้องการ... วิญญาณของเจ้า!",
-                defeat = "ความหิว... มันกลับมา... อีกแล้ว...",
-                playerResponses = listOf("มอบวิญญาณสังเวย", "ท้าทายความหิว")
-            )
+                intro = "เส้นทางของท่านอบอวลไปด้วยกลิ่นอายแห่งการทำลายล้าง... ท่านจะมอดไหม้ไปกับมัน หรือจะก้าวข้ามมันไป?",
+                midBattle = "ความร้อนนี้จะแผดเผาวิญญาณที่แปดเปื้อนของท่าน!",
+                defeat = "แม้แต่ไฟ... ก็มอดดับได้...",
+                playerResponses = listOf("ข้าจะดับไฟนี้", "ข้าจะกลายเป็นไฟที่กลืนกินทุกสิ่ง"),
+                postChoiceDialogues = mapOf("SPARE" to "ท่านเลือกที่จะยับยั้งชั่งใจ", "EXECUTE" to "จงกลายเป็นเปลวเพลิงที่กลืนกินทุกสิ่ง")
+            ),
+            spareReward = SecretBossReward(fireResistance = true, controlBuff = true),
+            executeReward = SecretBossReward(fireDamageRelic = true)
+        ),
+        SecretBoss(
+            id = "SECRET_SERPENT",
+            name = "White Serpent Spirit",
+            title = "จิตวิญญาณนางพญางูขาว",
+            sceneEntry = "จิตใจที่อ่อนโยนก้าวเข้าสู่สถานที่อันตราย",
+            personality = "นิ่งสงบและสังเกตการณ์",
+            baseHp = 18,
+            baseDamage = 1,
+            speed = 13,
+            mechanicDescription = "มนต์นางพญา: ลดความเสียหายที่ได้รับ 50% หากผู้เล่นไม่มีเกราะ",
+            unlockCondition = "บทที่ 3: ไว้ชีวิตบอส และ ปลดล็อกเส้นทางลับ",
+            loreHint = "ความเมตตานั้นหายาก... แต่เปราะบาง",
+            dialogue = BossDialogue(
+                intro = "ความเมตตานั้นหายาก... แต่เปราะบาง ท่านจะปกป้องมันได้หรือไม่?",
+                midBattle = "บางทีท่านอาจจะต่างออกไป...",
+                defeat = "จิตใจของท่าน... แข็งแกร่งกว่าที่ข้าเห็น...",
+                playerResponses = listOf("ข้าจะปกป้องความดีงาม", "โลกนี้ไม่มีที่ว่างให้คนอ่อนแอ"),
+                postChoiceDialogues = mapOf("SPARE" to "จงรักษาความเมตตานั้นไว้", "EXECUTE" to "แม้แต่ความเมตตาก็มีขีดจำกัด")
+            ),
+            spareReward = SecretBossReward(healBuff = true, sustainBonus = true),
+            executeReward = SecretBossReward(poisonDamage = true)
+        ),
+        SecretBoss(
+            id = "SECRET_SHADOW_LUBU",
+            name = "Shadow Lu Bu",
+            title = "เงาแห่งลิโป้",
+            sceneEntry = "ความเมตตาคือความอ่อนแอ",
+            personality = "หยิ่งยโสและบ้าคลั่ง",
+            baseHp = 22,
+            baseDamage = 2,
+            speed = 15,
+            mechanicDescription = "ท้าทายสวรรค์: เพิ่มพลังโจมตีทุกครั้งที่เสียเลือด",
+            unlockCondition = "บทที่ 4: ไว้ชีวิตลิโป้",
+            loreHint = "ความแข็งแกร่งที่ไร้จุดมุ่งหมายนั้นไร้ค่า",
+            dialogue = BossDialogue(
+                intro = "ท่านไว้ชีวิตข้า... แต่ท่านกลับแสวงหาความแข็งแกร่งงั้นหรือ?",
+                midBattle = "ความแข็งแกร่งที่ไร้จุดมุ่งหมายนั้นไร้ค่า!",
+                defeat = "ในที่สุด... ข้าก็ได้พบจุดมุ่งหมาย...",
+                playerResponses = listOf("ข้าต้องการเข้าใจท่าน", "ข้าต้องการเพียงพลังของท่าน"),
+                postChoiceDialogues = mapOf("SPARE" to "ท่านเลือกความเข้าใจ", "EXECUTE" to "จงรับพลังที่ท่านโหยหาไป")
+            ),
+            spareReward = SecretBossReward(unlockLuBuAlly = true),
+            executeReward = SecretBossReward(legendaryWeaponUpgrade = true)
+        ),
+        SecretBoss(
+            id = "SECRET_FATE_DRAGON",
+            name = "Dragon of Fate",
+            title = "มังกรแห่งโชคชะตา",
+            sceneEntry = "ท่านได้เปลี่ยนแปลงกงล้อแห่งพรหมลิขิตแล้ว",
+            personality = "ศักดิ์สิทธิ์และอยู่เหนือทุกสรรพสิ่ง",
+            baseHp = 30,
+            baseDamage = 2,
+            speed = 20,
+            mechanicDescription = "กงล้อแห่งชะตา: สุ่มบัฟ/เดบัฟทุกเทิร์น",
+            unlockCondition = "Spare >= 3 และ ชนะ Secret Boss >= 2",
+            loreHint = "ชะตากรรมไม่ใช่สิ่งตายตัวอีกต่อไป",
+            dialogue = BossDialogue(
+                intro = "ความเมตตา ความโกลาหล พลัง... ท่านแบกรับมันไว้ทั้งหมด",
+                midBattle = "ชะตากรรมไม่ใช่สิ่งตายตัวอีกต่อไป!",
+                defeat = "กาลเวลาบทใหม่... กำลังจะเริ่มขึ้น...",
+                playerResponses = listOf("รักษาสมดุล", "เขียนชะตาใหม่"),
+                postChoiceDialogues = mapOf("SPARE" to "ท่านเลือกความสามัคคี (Ending: Peace)", "EXECUTE" to "ท่านกลายเป็นโชคชะตาบทใหม่ (Ending: Ruler)")
+            ),
+            spareReward = SecretBossReward(),
+            executeReward = SecretBossReward()
         )
     )
 

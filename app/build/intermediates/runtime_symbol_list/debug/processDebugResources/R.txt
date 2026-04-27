@@ -3058,8 +3058,13 @@ int drawable ic_mtrl_checked_circle 0x7f0700a1
 int drawable ic_mtrl_chip_checked_black 0x7f0700a2
 int drawable ic_mtrl_chip_checked_circle 0x7f0700a3
 int drawable ic_mtrl_chip_close_circle 0x7f0700a4
+int drawable ic_relic_dragon 0x7f07010a
+int drawable ic_relic_seal 0x7f07010b
 int drawable ic_seal_signature 0x7f070101
 int drawable ic_search_black_24 0x7f0700a5
+int drawable img_boss_cursed_beast 0x7f070107
+int drawable img_boss_fallen_guardian 0x7f070108
+int drawable img_boss_spirit_guardian 0x7f070109
 int drawable img_character_caocao 0x7f0700a6
 int drawable img_character_guanyu 0x7f0700a7
 int drawable img_character_lubu 0x7f0700a8
@@ -3397,6 +3402,7 @@ int id ivEnemyImage 0x7f0800f5
 int id ivMount 0x7f08023a
 int id ivPlayerImage 0x7f0800f6
 int id ivPortrait 0x7f0800f7
+int id ivRelicIcon 0x7f080249
 int id ivTreasure 0x7f08023b
 int id ivWeapon 0x7f08023c
 int id jumpToEnd 0x7f0800f8
@@ -3416,6 +3422,9 @@ int id llEnemyInfo 0x7f080105
 int id llOptionsContainer 0x7f080235
 int id llPlayerHearts 0x7f080106
 int id llPlayerInfo 0x7f080107
+int id llRelicChoices 0x7f08024d
+int id llRelicContainer 0x7f08024b
+int id llRelics 0x7f08024a
 int id llTalentNodes 0x7f080108
 int id m3_side_sheet 0x7f080109
 int id marquee 0x7f08010a
@@ -3684,6 +3693,7 @@ int id tvInvTitle 0x7f080244
 int id tvMetaPoints 0x7f080207
 int id tvName 0x7f080208
 int id tvNameLabel 0x7f080209
+int id tvNewRelicInfo 0x7f08024e
 int id tvNodeInfo 0x7f08020a
 int id tvNodeRarity 0x7f08020b
 int id tvNodeState 0x7f08020c
@@ -3691,6 +3701,7 @@ int id tvPassive 0x7f08020d
 int id tvPlayerHp 0x7f08020e
 int id tvPointsEarned 0x7f08020f
 int id tvRageCount 0x7f080247
+int id tvRelicDescription 0x7f08024c
 int id tvResult 0x7f080236
 int id tvRewardCard1 0x7f080210
 int id tvRewardCard2 0x7f080211
@@ -3867,10 +3878,12 @@ int layout design_navigation_menu 0x7f0b002e
 int layout design_navigation_menu_item 0x7f0b002f
 int layout design_text_input_end_icon 0x7f0b0030
 int layout design_text_input_start_icon 0x7f0b0031
+int layout dialog_relic_replace 0x7f0b0078
 int layout ime_base_split_test_activity 0x7f0b0032
 int layout ime_secondary_split_test_activity 0x7f0b0033
 int layout item_card 0x7f0b0034
 int layout item_character_portrait 0x7f0b0035
+int layout item_relic 0x7f0b0077
 int layout item_talent_node 0x7f0b0036
 int layout layout_equipment 0x7f0b0075
 int layout m3_alert_dialog 0x7f0b0037
