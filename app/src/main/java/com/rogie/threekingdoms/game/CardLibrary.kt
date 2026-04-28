@@ -40,24 +40,28 @@ object CardLibrary {
     fun trapMastery() = Card("zl_u_mastery", "Trap Mastery", 1, "All traps deal +1 damage.", CardType.SKILL, EffectType.BUFF_STRENGTH, 1, CardRarity.RARE, listOf("[Trap]"))
     fun heavenlyStrategy() = Card("zl_u_heaven", "Heavenly Strategy", 3, "Gain Insight +5; Trigger all traps.", CardType.ULTIMATE, EffectType.DAMAGE, 2, CardRarity.LEGENDARY, listOf("[Ultimate]", "[Trap]", "[Insight]"))
 
-    // --- Guan Yu: Starting Cards (Nerfed) ---
-    fun greenDragonSlash() = Card("gy_slash_1", "Green Dragon Slash", 1, "Deal 1 damage; if Honor >= 2, +1 damage.", CardType.ATTACK, EffectType.DAMAGE, 1, CardRarity.COMMON, listOf("[Slash]", "[Honor]"))
-    fun guardStance() = Card("gy_guard", "Guard Stance", 1, "Gain 1 block; next time attacked, counter 1 damage.", CardType.DEFENSE, EffectType.BLOCK, 1, CardRarity.COMMON, listOf("[Defense]", "[Counter]"))
+    // --- Guan Yu: Starting Cards (Nerved) ---
+    fun greenDragonSlash() = Card("gy_slash_1", "Green Dragon Slash", 1, "Deal 6 damage; if Honor >= 2, +4 damage.", CardType.ATTACK, EffectType.DAMAGE, 6, CardRarity.COMMON, listOf("[Slash]", "[Honor]"))
+    fun guardStance() = Card("gy_guard", "Guard Stance", 1, "Gain block; next time attacked, counter 5 damage.", CardType.DEFENSE, EffectType.BLOCK, 4, CardRarity.COMMON, listOf("[Defense]", "[Counter]"))
     fun warDiscipline() = Card("gy_disc", "War Discipline", 1, "Gain Honor +1.", CardType.SKILL, EffectType.HONOR_BOOST, 1, CardRarity.COMMON, listOf("[Honor]"))
-    fun righteousStrike() = Card("gy_right", "Righteous Strike", 2, "Deal 1 damage; double if attacked last turn.", CardType.ATTACK, EffectType.DAMAGE, 1, CardRarity.COMMON, listOf("[Counter]"))
-    fun honorShield() = Card("gy_shield", "Honor Shield", 1, "Gain block equal to Honor.", CardType.SKILL, EffectType.BLOCK, 0, CardRarity.COMMON, listOf("[Defense]", "[Honor]"))
-    fun calmBeforeStrike() = Card("gy_calm", "Calm Before Strike", 0, "Next attack deals +1 damage.", CardType.SKILL, EffectType.BUFF_STRENGTH, 1, CardRarity.COMMON, listOf("[Buff]"))
-    fun loyalResolve() = Card("gy_loyal", "Loyal Resolve", 1, "Heal 1 HP; if Honor >= 2, draw 1.", CardType.SKILL, EffectType.HEAL, 1, CardRarity.COMMON, listOf("[Heal]", "[Honor]"))
-    fun judgmentCut() = Card("gy_judge", "Judgment Cut", 2, "Deal 1 damage; ignore defense.", CardType.ATTACK, EffectType.EXECUTE, 1, CardRarity.COMMON, listOf("[Execute]"))
+    fun righteousStrike() = Card("gy_right", "Righteous Strike", 2, "Deal 10 damage; double if attacked last turn.", CardType.ATTACK, EffectType.DAMAGE, 10, CardRarity.COMMON, listOf("[Counter]"))
+    fun honorShield() = Card("gy_shield", "Honor Shield", 1, "Gain block equal to Honor x 2.", CardType.SKILL, EffectType.BLOCK, 2, CardRarity.COMMON, listOf("[Defense]", "[Honor]"))
+    fun calmBeforeStrike() = Card("gy_calm", "Calm Before Strike", 0, "Next attack deals +50% damage.", CardType.SKILL, EffectType.BUFF_STRENGTH, 50, CardRarity.COMMON, listOf("[Buff]"))
+    fun loyalResolve() = Card("gy_loyal", "Loyal Resolve", 1, "Heal 3 HP; if Honor >= 3, draw 1.", CardType.SKILL, EffectType.HEAL, 3, CardRarity.COMMON, listOf("[Heal]", "[Honor]"))
+    fun judgmentCut() = Card("gy_judge", "Judgment Cut", 2, "Deal 8 damage; ignore defense.", CardType.ATTACK, EffectType.EXECUTE, 8, CardRarity.COMMON, listOf("[Execute]"))
 
     // --- Guan Yu: Unlockable Cards ---
-    fun counterFlow() = Card("gy_u_counter", "Counter Flow", 1, "All counters deal +1 damage this turn.", CardType.SKILL, EffectType.BUFF_STRENGTH, 1, CardRarity.RARE, listOf("[Counter]", "[Combo]"))
-    fun bladeOfOath() = Card("gy_u_oath", "Blade of Oath", 2, "Deal 1 damage per 2 Honor stack.", CardType.ATTACK, EffectType.DAMAGE, 1, CardRarity.RARE, listOf("[Honor]", "[Combo]"))
-    fun retaliationChain() = Card("gy_u_chain", "Retaliation Chain", 2, "If counter triggered, attack again for 1.", CardType.ATTACK, EffectType.DAMAGE, 1, CardRarity.RARE, listOf("[Counter]", "[Combo]"))
-    fun unyieldingWall() = Card("gy_u_wall", "Unyielding Wall", 2, "All damage reduced to 1 this turn.", CardType.DEFENSE, EffectType.BLOCK, 1, CardRarity.RARE, listOf("[Defense]"))
-    fun oathbreakerPunish() = Card("gy_u_punish", "Oathbreaker Punish", 2, "Deal 2 damage if enemy used buff.", CardType.ATTACK, EffectType.DAMAGE, 2, CardRarity.RARE, listOf("[Counter]"))
-    fun perfectGuard() = Card("gy_u_perfect", "Perfect Guard", 1, "Negate next damage and counter 1.", CardType.DEFENSE, EffectType.COUNTER, 1, CardRarity.RARE, listOf("[Defense]", "[Counter]"))
+    fun counterFlow() = Card("gy_u_counter", "Counter Flow", 1, "All counters deal +50% damage this turn.", CardType.SKILL, EffectType.BUFF_STRENGTH, 50, CardRarity.RARE, listOf("[Counter]", "[Combo]"))
+    fun bladeOfOath() = Card("gy_u_oath", "Blade of Oath", 2, "Deal 6 damage per Honor stack.", CardType.ATTACK, EffectType.DAMAGE, 6, CardRarity.RARE, listOf("[Honor]", "[Combo]"))
+    fun retaliationChain() = Card("gy_u_chain", "Retaliation Chain", 2, "If counter triggered, attack again.", CardType.ATTACK, EffectType.DAMAGE, 0, CardRarity.RARE, listOf("[Counter]", "[Combo]"))
+    fun unyieldingWall() = Card("gy_u_wall", "Unyielding Wall", 2, "All damage reduced to 2 this turn.", CardType.DEFENSE, EffectType.BLOCK, 1, CardRarity.RARE, listOf("[Defense]"))
+    fun oathbreakerPunish() = Card("gy_u_punish", "Oathbreaker Punish", 2, "Deal 12 damage if enemy used buff.", CardType.ATTACK, EffectType.DAMAGE, 12, CardRarity.RARE, listOf("[Counter]"))
+    fun perfectGuard() = Card("gy_u_perfect", "Perfect Guard", 1, "Negate next damage and counter 8.", CardType.DEFENSE, EffectType.COUNTER, 8, CardRarity.RARE, listOf("[Defense]", "[Counter]"))
     fun honorSurge() = Card("gy_u_surge", "Honor Surge", 1, "Gain Honor +2.", CardType.SKILL, EffectType.HONOR_BOOST, 2, CardRarity.RARE, listOf("[Honor]"))
+    fun flowingCounter() = Card("gy_u_flowing", "Flowing Counter", 1, "Counter chains to another enemy.", CardType.SKILL, EffectType.COUNTER, 1, CardRarity.RARE, listOf("[Counter]"))
+    fun sacredDefense() = Card("gy_u_sacred", "Sacred Defense", 1, "Gain block; if not broken, gain Honor +1.", CardType.DEFENSE, EffectType.BLOCK, 4, CardRarity.RARE, listOf("[Defense]", "[Honor]"))
+    fun twinStrikeJustice() = Card("gy_u_twin", "Twin Strike Justice", 2, "Attack twice; if Honor >= 2, attack 3 times.", CardType.ATTACK, EffectType.MULTI_HIT, 2, CardRarity.RARE, listOf("[Combo]", "[Honor]"))
+    fun saintOfWar() = Card("gy_ultimate", "Saint of War", 3, "Consume all Honor; Deal 8 x Honor damage; Immunity this turn.", CardType.ULTIMATE, EffectType.DAMAGE, 8, CardRarity.LEGENDARY, listOf("[Ultimate]", "[Honor]"))
 
     // --- Lu Bu: Full Set ---
     private fun slash() = Card("lb_slash", "Slash", 1, "Deal 1 damage.", CardType.ATTACK, EffectType.DAMAGE, 1, CardRarity.COMMON, listOf("[Slash]"))
@@ -94,7 +98,7 @@ object CardLibrary {
         warRecovery(), ironBody(), chainAssault(), relentlessFury(),
         warMomentum(), demonicInstinct(), rageIncarnate(),
         counterFlow(), bladeOfOath(), retaliationChain(), unyieldingWall(),
-        oathbreakerPunish(), perfectGuard(), honorSurge(),
+        oathbreakerPunish(), perfectGuard(), honorSurge(), flowingCounter(), sacredDefense(), twinStrikeJustice(), saintOfWar(),
         fireTrapFormation(), chainStrategy(), insightOverload(), eightFormationField(),
         windControl(), delayedExecution(), masterPrediction(), strategicRecovery()
     )

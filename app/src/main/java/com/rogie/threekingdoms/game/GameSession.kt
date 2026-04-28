@@ -25,14 +25,17 @@ object GameSession {
     var currentChapter: Int = 1
     var encounterCount: Int = 0
     var isMainStoryEvent: Boolean = true
+    var needsEpilogue: Boolean = false // ตัวแปรใหม่สำหรับเนื้อเรื่องจบบท
     var lastBossDefeatedId: String? = null
     
     var enemiesDefeated: Int = 0
     var bossesDefeated: Int = 0
     var pendingUnlock: CharacterId? = null
     var hasImperialSeal: Boolean = false
+
+    val hiddenFlags = mutableMapOf<String, Boolean>()
+    val counterFlags = mutableMapOf<String, Int>()
     
-    // Multipliers
     var attackMultiplier: Double = 1.0
     var critDamageMultiplier: Double = 1.5
     var critChance: Double = 0.1
@@ -63,7 +66,6 @@ object GameSession {
         deck = CardLibrary.starterDeck(selected.id).toMutableList()
         inventory = mutableListOf()
         
-        // Reset Progression
         chaosLevel = 0
         honorLevel = 0
         spareCount = 0
@@ -72,6 +74,7 @@ object GameSession {
         currentChapter = 1
         encounterCount = 0
         isMainStoryEvent = true
+        needsEpilogue = false
         lastBossDefeatedId = null
         
         enemiesDefeated = 0
@@ -79,6 +82,8 @@ object GameSession {
         pendingUnlock = null
         nextForcedEnemy = null
         hasImperialSeal = false
+        hiddenFlags.clear()
+        counterFlags.clear()
 
         attackMultiplier = 1.0
         critDamageMultiplier = 1.5
@@ -112,10 +117,9 @@ object GameSession {
         if (enemy.isBoss) {
             bossesDefeated++
             lastBossDefeatedId = enemy.id
-            isMainStoryEvent = true // Trigger Spare/Execute dialog
-            if (enemy.id.startsWith("SECRET")) secretBossesDefeated++
+            needsEpilogue = true // เตรียมแสดงเนื้อเรื่องปิดบท
             
-            // Standard Unlocks
+            if (enemy.id.startsWith("SECRET")) secretBossesDefeated++
             if (enemy.id == "BOSS_LU_BU") pendingUnlock = CharacterId.LU_BU
             if (enemy.id == "BOSS_CAO_CAO") pendingUnlock = CharacterId.CAO_CAO
             if (enemy.id == "BOSS_ZHOU_YU") pendingUnlock = CharacterId.ZHOU_YU
@@ -133,39 +137,54 @@ object GameSession {
             return e
         }
 
-        encounterCount++
-        // Final Chapter logic
-        if (currentChapter >= 5) {
-            return buildFinalBoss(1.0 + (encounterCount * 0.15))
+        if (encounterCount > 0 && encounterCount % 4 == 0) {
+            val secretBoss = checkSecretBossTriggers()
+            if (secretBoss != null) return secretBoss
         }
 
-        val isBoss = encounterCount % 5 == 0
-        val scale = 1.0 + (encounterCount * 0.15)
+        encounterCount++
+        if (currentChapter >= 5) {
+            return buildFinalBoss(1.0 + (encounterCount * 0.2))
+        }
+
+        // ปรับให้สู้บอสทุกๆ 8 ด่าน เพื่อให้มีเหตุการณ์สุ่มเยอะขึ้น
+        val isBoss = encounterCount % 8 == 0
+        val scale = 1.0 + (encounterCount * 0.25)
         
         return if (isBoss) {
             when (currentChapter) {
-                1 -> Enemy("CORRUPTED_GENERAL", "แม่ทัพผู้แปดเปื้อน", (10 * scale).toInt(), (10 * scale).toInt(), 1, isBoss = true, speed = 10)
-                2 -> Enemy("FLAME_WARLORD", "ขุนพลอัคคี", (12 * scale).toInt(), (12 * scale).toInt(), 1, isBoss = true, speed = 12)
-                3 -> Enemy("ILLUSION_KEEPER", "ผู้พิทักษ์ภาพลวงตา", (14 * scale).toInt(), (14 * scale).toInt(), 1, isBoss = true, speed = 13)
-                else -> Enemy("BOSS_LU_BU", "ลิโป้ จอมราชันย์ล่มสลาย", (18 * scale).toInt(), (18 * scale).toInt(), 2, isBoss = true, speed = 15)
+                1 -> Enemy("CORRUPTED_GENERAL", "แม่ทัพผู้แปดเปื้อน", (35 * scale).toInt(), (35 * scale).toInt(), 3, isBoss = true, speed = 10)
+                2 -> Enemy("FLAME_WARLORD", "ขุนพลอัคคี", (50 * scale).toInt(), (50 * scale).toInt(), 4, isBoss = true, speed = 12)
+                3 -> Enemy("ILLUSION_KEEPER", "ผู้พิทักษ์ภาพลวงตา", (65 * scale).toInt(), (65 * scale).toInt(), 5, isBoss = true, speed = 13)
+                else -> Enemy("BOSS_LU_BU", "ลิโป้ จอมราชันย์ล่มสลาย", (90 * scale).toInt(), (90 * scale).toInt(), 6, isBoss = true, speed = 15)
             }
         } else {
             when (Random.nextInt(3)) {
-                0 -> Enemy("BANDITS", "Bandit Raiders", (3 * scale).toInt(), (3 * scale).toInt(), 1, speed = 9)
-                1 -> Enemy("RIVAL_GENERAL", "Rival General", (4 * scale).toInt(), (4 * scale).toInt(), 1, speed = 11)
-                else -> Enemy("ARMY", "Vanguard Force", (5 * scale).toInt(), (5 * scale).toInt(), 1, speed = 10)
+                0 -> Enemy("BANDITS", "กองโจรป่า", (12 * scale).toInt(), (12 * scale).toInt(), 2, speed = 9)
+                1 -> Enemy("RIVAL_GENERAL", "ขุนพลฝ่ายศัตรู", (18 * scale).toInt(), (18 * scale).toInt(), 3, speed = 11)
+                else -> Enemy("ARMY", "กองทัพหน้า", (22 * scale).toInt(), (22 * scale).toInt(), 4, speed = 10)
             }
         }
+    }
+
+    private fun checkSecretBossTriggers(): Enemy? {
+        val scale = 1.0 + (encounterCount * 0.3)
+        // ... (Logic เดิม)
+        if (hiddenFlags["shrine_prayed"] == true && !hiddenFlags.containsKey("boss_spirit_guardian")) {
+            hiddenFlags["boss_spirit_guardian"] = true
+            return Enemy("SECRET_SPIRIT_GUARDIAN", "องครักษ์จิตวิญญาณ", (50 * scale).toInt(), (50 * scale).toInt(), 5, isBoss = true, speed = 14)
+        }
+        return null
     }
 
     private fun buildFinalBoss(scale: Double): Enemy {
         return when {
             spareCount >= 3 && secretBossesDefeated >= 2 -> 
-                Enemy("TRUE_BOSS_DRAGON", "มังกรแห่งโชคชะตา", (25 * scale).toInt(), (25 * scale).toInt(), 2, isBoss = true, speed = 20)
+                Enemy("TRUE_BOSS_DRAGON", "มังกรแห่งโชคชะตา", (150 * scale).toInt(), (150 * scale).toInt(), 10, isBoss = true, speed = 20)
             spareCount > executeCount -> 
-                Enemy("FALLEN_GUARDIAN", "ผู้พิทักษ์ที่ร่วงหล่น", (20 * scale).toInt(), (20 * scale).toInt(), 1, isBoss = true, speed = 15)
+                Enemy("FALLEN_GUARDIAN", "ผู้พิทักษ์ที่ร่วงหล่น", (100 * scale).toInt(), (100 * scale).toInt(), 7, isBoss = true, speed = 15)
             else -> 
-                Enemy("CHAOS_INCARNATE", "อวตารแห่งความบ้าคลั่ง", (22 * scale).toInt(), (22 * scale).toInt(), 2, isBoss = true, speed = 18)
+                Enemy("CHAOS_INCARNATE", "อวตารแห่งความบ้าคลั่ง", (120 * scale).toInt(), (120 * scale).toInt(), 8, isBoss = true, speed = 18)
         }
     }
 

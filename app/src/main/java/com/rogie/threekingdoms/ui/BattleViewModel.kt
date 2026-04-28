@@ -49,7 +49,15 @@ class BattleViewModel : ViewModel() {
     }
 
     fun endTurn() {
-        val result = battleManager.endPlayerTurn()
+        val result = endTurnString()
+        processEndTurnResult(result)
+    }
+
+    fun endTurnString(): String {
+        return battleManager.endPlayerTurn()
+    }
+
+    fun processEndTurnResult(result: String) {
         if (enemy.hp <= 0) {
             GameSession.player.gold += 20 + GameSession.bonusGoldPerVictory
             GameSession.onEnemyDefeated(enemy)
