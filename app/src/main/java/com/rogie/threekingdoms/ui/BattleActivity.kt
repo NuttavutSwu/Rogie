@@ -98,10 +98,14 @@ class BattleActivity : AppCompatActivity() {
         }
         ivPlayerImage.setImageResource(playerRes)
 
+        // ปรับการดึงรูปศัตรูให้หลากหลายขึ้น
         val enemyName = viewModel.enemyNameText()
         val enemyRes = when {
-            enemyName.contains("Lu Bu") -> R.drawable.img_character_lubu
-            enemyName.contains("Cao Cao") -> R.drawable.img_character_caocao
+            enemyName.contains("ลิโป้") || enemyName.contains("Lu Bu") -> R.drawable.img_character_lubu
+            enemyName.contains("โจโฉ") || enemyName.contains("Cao Cao") -> R.drawable.img_character_caocao
+            enemyName.contains("โจร") || enemyName.contains("Bandit") -> R.drawable.img_enemy_bandit
+            enemyName.contains("ทัพหน้า") || enemyName.contains("Army") || enemyName.contains("Vanguard") -> R.drawable.img_enemy_army
+            enemyName.contains("แม่ทัพ") || enemyName.contains("General") -> R.drawable.img_enemy_general
             else -> R.drawable.img_enemy_generic
         }
         ivEnemyImage.setImageResource(enemyRes)
@@ -278,10 +282,13 @@ class BattleActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         GameSession.player.relics.forEach { relic ->
             val view = inflater.inflate(R.layout.item_relic, llRelics, false)
+            // หาไอคอนภายใน View (ถ้ามี) หรือเซ็ต Background
+            val ivRelicIcon = view.findViewById<ImageView>(R.id.ivRelicIcon)
+            relic.iconResId?.let { ivRelicIcon?.setImageResource(it) }
+
             view.setOnClickListener {
                 tvRelicDescription.text = "${relic.name}: ${relic.description}"
                 tvRelicDescription.visibility = View.VISIBLE
-                // Reset any existing hides and set a new one
                 view.removeCallbacks(hideRelicDescRunnable)
                 view.postDelayed(hideRelicDescRunnable, 3000)
             }

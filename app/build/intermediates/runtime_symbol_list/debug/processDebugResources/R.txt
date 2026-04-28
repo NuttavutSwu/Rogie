@@ -3110,6 +3110,8 @@ int drawable img_event_elite 0x7f07012c
 int drawable img_event_executioner 0x7f07012d
 int drawable img_event_generic 0x7f0700c0
 int drawable img_event_military 0x7f0700c1
+int drawable img_event_mist 0x7f070133
+int drawable img_event_night 0x7f070134
 int drawable img_event_shield 0x7f07012f
 int drawable img_event_siege 0x7f07012e
 int drawable indeterminate_static 0x7f0700c2

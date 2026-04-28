@@ -95,6 +95,8 @@ drawable img_event_elite
 drawable img_event_executioner
 drawable img_event_generic
 drawable img_event_military
+drawable img_event_mist
+drawable img_event_night
 drawable img_event_shield
 drawable img_event_siege
 drawable village
