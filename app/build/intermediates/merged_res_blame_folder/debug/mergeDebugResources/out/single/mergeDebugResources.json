@@ -4,12 +4,12 @@
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\img_event_elite.xml"
     },
     {
-        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_card_decoration.xml.flat",
-        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_card_decoration.xml"
-    },
-    {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\layout_activity_skill_tree.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\layout\\activity_skill_tree.xml"
+    },
+    {
+        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_card_decoration.xml.flat",
+        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_card_decoration.xml"
     },
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\layout_item_relic.xml.flat",
@@ -38,6 +38,10 @@
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_heart_half.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_heart_half.xml"
+    },
+    {
+        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_img_event_cavalry.xml.flat",
+        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\img_event_cavalry.xml"
     },
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_bg_card_legendary.xml.flat",
@@ -176,6 +180,10 @@
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\img_boss_cursed_beast.xml"
     },
     {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_flamevillage.png.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/flamevillage.png"
+    },
+    {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_bg_scroll.xml.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\bg_scroll.xml"
     },
@@ -300,12 +308,12 @@
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_equip_weapon.xml"
     },
     {
-        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_equip_treasure.xml.flat",
-        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_equip_treasure.xml"
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_village.jpg.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/village.jpg"
     },
     {
-        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_img_event_cavalry.xml.flat",
-        "source": "com.rogie.threekingdoms.app-main-40:/drawable/img_event_cavalry.xml"
+        "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_equip_treasure.xml.flat",
+        "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\ic_equip_treasure.xml"
     },
     {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_ic_relic_fangs.xml.flat",

@@ -26,6 +26,7 @@ drawable bg_card_parchment
 drawable bg_card_rare
 drawable bg_main_menu_adventure
 drawable bg_scroll
+drawable flamevillage
 drawable ic_card_decoration
 drawable ic_character_caocao
 drawable ic_character_guanyu
@@ -96,6 +97,7 @@ drawable img_event_generic
 drawable img_event_military
 drawable img_event_shield
 drawable img_event_siege
+drawable village
 id btnBackToMenu
 id btnBeginRun
 id btnCloseInv
