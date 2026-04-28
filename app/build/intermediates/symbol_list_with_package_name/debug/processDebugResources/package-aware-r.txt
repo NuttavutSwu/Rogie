@@ -3100,7 +3100,6 @@ drawable img_character_zhouyu
 drawable img_character_zhugeliang
 drawable img_enemy_army
 drawable img_enemy_bandit
-drawable img_enemy_general
 drawable img_enemy_generic
 drawable img_event_archers
 drawable img_event_battlefield
@@ -3108,7 +3107,7 @@ drawable img_event_beast
 drawable img_event_cavalry
 drawable img_event_duel
 drawable img_event_elite
-drawable img_event_executioner
+drawable img_event_excutioner
 drawable img_event_generic
 drawable img_event_military
 drawable img_event_mist
@@ -3116,6 +3115,7 @@ drawable img_event_night
 drawable img_event_shield
 drawable img_event_siege
 drawable indeterminate_static
+drawable ing_enemy_generic
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle

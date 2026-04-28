@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -24,7 +25,6 @@ import com.rogie.threekingdoms.meta.CharacterId
 import com.rogie.threekingdoms.meta.CharacterLibrary
 import com.rogie.threekingdoms.meta.MetaProgressionManager
 import com.rogie.threekingdoms.model.CardType
-import com.rogie.threekingdoms.model.Relic
 
 class BattleActivity : AppCompatActivity() {
     private val viewModel: BattleViewModel by viewModels()
@@ -98,14 +98,13 @@ class BattleActivity : AppCompatActivity() {
         }
         ivPlayerImage.setImageResource(playerRes)
 
-        // ปรับการดึงรูปศัตรูให้หลากหลายขึ้น
         val enemyName = viewModel.enemyNameText()
         val enemyRes = when {
             enemyName.contains("ลิโป้") || enemyName.contains("Lu Bu") -> R.drawable.img_character_lubu
             enemyName.contains("โจโฉ") || enemyName.contains("Cao Cao") -> R.drawable.img_character_caocao
             enemyName.contains("โจร") || enemyName.contains("Bandit") -> R.drawable.img_enemy_bandit
             enemyName.contains("ทัพหน้า") || enemyName.contains("Army") || enemyName.contains("Vanguard") -> R.drawable.img_enemy_army
-            enemyName.contains("แม่ทัพ") || enemyName.contains("General") -> R.drawable.img_enemy_general
+            enemyName.contains("แม่ทัพ") || enemyName.contains("General") -> R.drawable.img_enemy_generic
             else -> R.drawable.img_enemy_generic
         }
         ivEnemyImage.setImageResource(enemyRes)
@@ -282,7 +281,6 @@ class BattleActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         GameSession.player.relics.forEach { relic ->
             val view = inflater.inflate(R.layout.item_relic, llRelics, false)
-            // หาไอคอนภายใน View (ถ้ามี) หรือเซ็ต Background
             val ivRelicIcon = view.findViewById<ImageView>(R.id.ivRelicIcon)
             relic.iconResId?.let { ivRelicIcon?.setImageResource(it) }
 
@@ -302,15 +300,36 @@ class BattleActivity : AppCompatActivity() {
 
     private fun renderHearts(container: LinearLayout, currentHp: Int, maxHp: Int) {
         container.removeAllViews()
-        repeat(maxHp) { index ->
+        container.gravity = Gravity.CENTER
+        
+        if (maxHp > 10) {
+            // Show single heart + text for high HP to avoid UI mess
             val heart = ImageView(this)
-            val drawable = if (index < currentHp) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
-            heart.setImageResource(drawable)
+            heart.setImageResource(R.drawable.ic_heart_full)
             val size = resources.getDimensionPixelSize(R.dimen.heart_size_small)
-            val params = LinearLayout.LayoutParams(size, size)
-            params.marginEnd = 2
-            heart.layoutParams = params
+            heart.layoutParams = LinearLayout.LayoutParams(size, size)
             container.addView(heart)
+
+            val hpText = TextView(this)
+            hpText.text = " x $currentHp / $maxHp"
+            hpText.setTextColor(getColor(android.R.color.white))
+            hpText.textSize = 10f
+            container.addView(hpText)
+        } else {
+            // Standard small heart rendering
+            container.orientation = LinearLayout.HORIZONTAL
+            repeat(maxHp) { index ->
+                val heart = ImageView(this)
+                val drawable = if (index < currentHp) R.drawable.ic_heart_full else R.drawable.ic_heart_empty
+                heart.setImageResource(drawable)
+                
+                val size = resources.getDimensionPixelSize(R.dimen.heart_size_small)
+                val params = LinearLayout.LayoutParams(size, size)
+                params.marginEnd = 2
+                heart.layoutParams = params
+                
+                container.addView(heart)
+            }
         }
     }
 

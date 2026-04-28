@@ -3099,7 +3099,6 @@ int drawable img_character_zhouyu 0x7f0700ba
 int drawable img_character_zhugeliang 0x7f0700bb
 int drawable img_enemy_army 0x7f0700bc
 int drawable img_enemy_bandit 0x7f0700bd
-int drawable img_enemy_general 0x7f0700be
 int drawable img_enemy_generic 0x7f0700bf
 int drawable img_event_archers 0x7f070128
 int drawable img_event_battlefield 0x7f070129
@@ -3107,7 +3106,7 @@ int drawable img_event_beast 0x7f07012a
 int drawable img_event_cavalry 0x7f070130
 int drawable img_event_duel 0x7f07012b
 int drawable img_event_elite 0x7f07012c
-int drawable img_event_executioner 0x7f07012d
+int drawable img_event_excutioner 0x7f070135
 int drawable img_event_generic 0x7f0700c0
 int drawable img_event_military 0x7f0700c1
 int drawable img_event_mist 0x7f070133
@@ -3115,6 +3114,7 @@ int drawable img_event_night 0x7f070134
 int drawable img_event_shield 0x7f07012f
 int drawable img_event_siege 0x7f07012e
 int drawable indeterminate_static 0x7f0700c2
+int drawable ing_enemy_generic 0x7f070136
 int drawable m3_avd_hide_password 0x7f0700c3
 int drawable m3_avd_show_password 0x7f0700c4
 int drawable m3_bottom_sheet_drag_handle 0x7f0700c5
