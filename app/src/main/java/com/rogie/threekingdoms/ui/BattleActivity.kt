@@ -26,6 +26,10 @@ import com.rogie.threekingdoms.meta.CharacterLibrary
 import com.rogie.threekingdoms.meta.MetaProgressionManager
 import com.rogie.threekingdoms.model.CardType
 
+/**
+ * The main Activity responsible for handling the turn-based combat UI.
+ * Manages player/enemy animations, card interaction, and real-time stat updates.
+ */
 class BattleActivity : AppCompatActivity() {
     private val viewModel: BattleViewModel by viewModels()
     private lateinit var cardAdapter: CardAdapter
@@ -69,6 +73,9 @@ class BattleActivity : AppCompatActivity() {
         refreshStats()
     }
 
+    /**
+     * Finds and initializes all view components from the layout.
+     */
     private fun bindViews() {
         tvPlayerHp = findViewById(R.id.tvPlayerHp)
         tvEnemyHp = findViewById(R.id.tvEnemyHp)
@@ -88,6 +95,9 @@ class BattleActivity : AppCompatActivity() {
         tvRelicDescription = findViewById(R.id.tvRelicDescription)
     }
 
+    /**
+     * Sets up the initial character and enemy sprites based on the game session.
+     */
     private fun setVisuals() {
         val playerRes = when (GameSession.selectedCharacter) {
             CharacterId.GUAN_YU -> R.drawable.img_character_guanyu
@@ -114,6 +124,9 @@ class BattleActivity : AppCompatActivity() {
         tvInsightCount.visibility = if (GameSession.selectedCharacter == CharacterId.ZHUGE_LIANG) View.VISIBLE else View.GONE
     }
 
+    /**
+     * Initializes the horizontal RecyclerView for the player's card hand.
+     */
     private fun setupRecycler() {
         cardAdapter = CardAdapter { card ->
             val hasEnergy = GameSession.player.energy >= card.energyCost
@@ -148,6 +161,10 @@ class BattleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Plays a forward dash animation when the player uses an attack card.
+     * @param onStrike Callback executed when the player "hits" the enemy.
+     */
     private fun playAttackAnimation(onStrike: () -> Unit) {
         val originalX = ivPlayerImage.translationX
         val distance = (ivEnemyImage.x - ivPlayerImage.x) * 0.7f
@@ -170,6 +187,10 @@ class BattleActivity : AppCompatActivity() {
             .start()
     }
 
+    /**
+     * Plays a dash animation when the enemy attacks the player.
+     * @param onStrike Callback executed when the enemy "hits" the player.
+     */
     private fun playEnemyAttackAnimation(onStrike: () -> Unit) {
         val originalX = ivEnemyImage.translationX
         val distance = (ivEnemyImage.x - ivPlayerImage.x) * 0.7f
@@ -192,6 +213,9 @@ class BattleActivity : AppCompatActivity() {
             .start()
     }
 
+    /**
+     * Plays a shake animation when the player tries to use a card without enough energy.
+     */
     private fun playTiredAnimation() {
         ivPlayerImage.animate()
             .translationYBy(20f)
@@ -206,6 +230,9 @@ class BattleActivity : AppCompatActivity() {
             .start()
     }
 
+    /**
+     * Plays a scaling hit reaction animation on the enemy sprite.
+     */
     private fun playEnemyHitAnimation() {
         ivEnemyImage.animate()
             .scaleX(0.9f)
@@ -233,6 +260,9 @@ class BattleActivity : AppCompatActivity() {
             .start()
     }
 
+    /**
+     * Plays a scaling hit reaction animation on the player sprite.
+     */
     private fun playPlayerHitAnimation() {
         ivPlayerImage.animate()
             .scaleX(0.85f)
@@ -250,6 +280,9 @@ class BattleActivity : AppCompatActivity() {
             .start()
     }
 
+    /**
+     * Observes ViewModel data to update the hand and status log.
+     */
     private fun setupObservers() {
         viewModel.hand.observe(this) {
             cardAdapter.update(it)
@@ -259,6 +292,9 @@ class BattleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Forces a refresh of all numeric and visual stats (HP, Energy, Hearts, Relics).
+     */
     private fun refreshStats() {
         tvPlayerHp.text = viewModel.playerHpText()
         tvEnemyHp.text = viewModel.enemyHpText()
@@ -276,6 +312,9 @@ class BattleActivity : AppCompatActivity() {
         renderRelics()
     }
 
+    /**
+     * Renders small relic icons owned by the player. Includes click listeners for descriptions.
+     */
     private fun renderRelics() {
         llRelics.removeAllViews()
         val inflater = LayoutInflater.from(this)
@@ -298,12 +337,15 @@ class BattleActivity : AppCompatActivity() {
         tvRelicDescription.visibility = View.INVISIBLE
     }
 
+    /**
+     * Dynamically renders heart icons based on current health.
+     * Caps individual icons at 10 to prevent UI clutter, showing a numeric multiplier instead.
+     */
     private fun renderHearts(container: LinearLayout, currentHp: Int, maxHp: Int) {
         container.removeAllViews()
         container.gravity = Gravity.CENTER
         
         if (maxHp > 10) {
-            // Show single heart + text for high HP to avoid UI mess
             val heart = ImageView(this)
             heart.setImageResource(R.drawable.ic_heart_full)
             val size = resources.getDimensionPixelSize(R.dimen.heart_size_small)
@@ -316,7 +358,6 @@ class BattleActivity : AppCompatActivity() {
             hpText.textSize = 10f
             container.addView(hpText)
         } else {
-            // Standard small heart rendering
             container.orientation = LinearLayout.HORIZONTAL
             repeat(maxHp) { index ->
                 val heart = ImageView(this)
@@ -333,10 +374,18 @@ class BattleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Checks if the battle has ended and navigates to the appropriate screen (Reward or Death).
+     * Calculates skill points upon death: 1 per Mob, 10 per Boss.
+     */
     private fun processBattleState() {
         if (viewModel.battleEnded.value == true) {
             if (GameSession.player.hp <= 0) {
-                val earned = (GameSession.enemiesDefeated * 2) + (GameSession.bossesDefeated * 15) + (GameSession.currentChapter * 5)
+                // Calculate earned points: 1 per Mob, 10 per Boss
+                // Note: enemiesDefeated includes bosses, so we subtract bossesDefeated to get regular mobs
+                val regularEnemies = GameSession.enemiesDefeated - GameSession.bossesDefeated
+                val earned = (regularEnemies * 1) + (GameSession.bossesDefeated * 10)
+                
                 MetaProgressionManager.addSkillPoints(this, earned)
                 startActivity(
                     Intent(this, DeathSummaryActivity::class.java)
