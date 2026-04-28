@@ -1,58 +1,34 @@
-# Three Kingdoms Deck Rogue (Android Prototype)
+# Three Kingdoms Deck Rogue (Android Narrative Update)
 
-A beginner-friendly Kotlin + XML Android Studio prototype of a roguelike deck-building card game inspired by the Three Kingdoms era.
+A narrative-driven roguelike deck-building card game for Android.
 
-## Included Features
+## 🌟 New & Updated Features
+### 📖 Narrative & Story System
+* **Chapter-Based Progression:** Experience the story through Chapters (Intro/Epilogue).
+* **Dynamic Story Events:** Spare or Execute bosses after battle.
+* **Random Encounters:** 70% Military encounters / 30% World events.
+* **Integrated Shop System:** Mid-run upgrades via traveling merchants.
 
-- Character selection at game start (with faction-linked heroes)
-- Turn-based battle loop with energy, HP, block, and hand cards
-- RecyclerView card hand UI
-- Card types and effects (Attack, Defense, Skill, Strategy)
-- Famous generals as high-impact cards:
-  - Guan Yu
-  - Zhang Fei
-  - Zhuge Liang
-  - Cao Cao
-  - Lu Bu (rare)
-- Roguelike progression:
-  - Random encounters
-  - Boss every 5th battle (Lu Bu, Dong Zhuo, Yuan Shao)
-  - Post-battle reward: choose 1 of 3 cards
-  - Extra random reward (gold or heal)
-  - Optional relic chance: Imperial Seal (+1 max energy)
-- Permadeath run reset when HP reaches 0
-- Persistent meta progression:
-  - Character unlocks after boss kills (e.g. Lu Bu, Cao Cao)
-  - Skill points earned on death from run performance
-  - Character-specific skill trees with permanent upgrades
-  - Character selection screen (unlocked only)
-  - Skill tree upgrade screen
-  - Death summary screen with earned points
-  - Slight enemy scaling based on upgrade strength
 
-## Architecture
+### ⚔
+️ Battle & Meta-Progression
+* **Turn-based Combat:** Energy, HP, Block, and Hand management.
+* **Famous Generals:** Cards like Guan Yu, Zhang Fei, and Lu Bu.
+* **Meta-Progression:** Earn Skill Points to unlock permanent upgrades.
+* **Permadeath:** Run resets on HP 0.
 
-- MVVM-style UI state handling:
-  - `BattleViewModel` for battle screen state
-- Core classes:
-  - `Card`
-  - `Player`
-  - `Enemy`
-  - `DeckManager`
-  - `BattleManager`
-- Run/session data:
-  - `GameSession`
-
-## Project Structure
-
-- `app/src/main/java/com/rogie/threekingdoms/model` - game data models
-- `app/src/main/java/com/rogie/threekingdoms/game` - core game logic
-- `app/src/main/java/com/rogie/threekingdoms/ui` - activities, adapter, view model
-- `app/src/main/res/layout` - XML UI layouts
-- `app/src/main/res/drawable/bg_scroll.xml` - card/scroll visual style
-
-## Run
-
-1. Open project in Android Studio.
-2. Let Gradle sync.
-3. Run on an emulator or Android device (API 24+).
+## 📂 Project Structure
+* `model/`: Game data (Card, StoryEvent).
+* `game/`: Core logic (GameSession, ShopLibrary).
+* `ui/`: Activities (Battle, Story, Selection).
+* 
+## 🚀 Getting Started
+1. Clone the repository.
+2. Open in Android Studio (Ladybug or newer).
+3. Place story images (e.g., `village.png`) in `app/src/main/res/drawable/`.
+4. Run on API 24+ (Android 7.0).
+## 🚀 Getting Started
+1. Clone the repository.
+2. Open in Android Studio (Ladybug or newer).
+3. Place story images (e.g., `village.png`) in `app/src/main/res/drawable/`.
+4. Run on API 24+ (Android 7.0).
