@@ -452,6 +452,10 @@
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\layout\\item_card.xml"
     },
     {
+        "merged": "com.rogie.threekingdoms.app-debug-38:/drawable_bg_option_box.xml.flat",
+        "source": "com.rogie.threekingdoms.app-main-40:/drawable/bg_option_box.xml"
+    },
+    {
         "merged": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-debug-38:\\drawable_img_event_night.jpg.flat",
         "source": "C:\\Users\\nutta\\.gradle\\daemon\\9.0-milestone-1\\com.rogie.threekingdoms.app-main-40:\\drawable\\img_event_night.jpg"
     },

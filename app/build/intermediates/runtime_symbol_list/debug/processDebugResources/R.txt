@@ -3009,6 +3009,7 @@ int drawable bg_card_legendary 0x7f07007b
 int drawable bg_card_parchment 0x7f07007c
 int drawable bg_card_rare 0x7f07007d
 int drawable bg_main_menu_adventure 0x7f07007e
+int drawable bg_option_box 0x7f070137
 int drawable bg_scroll 0x7f07007f
 int drawable btn_checkbox_checked_mtrl 0x7f070080
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x7f070081

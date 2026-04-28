@@ -25,6 +25,7 @@ drawable bg_card_legendary
 drawable bg_card_parchment
 drawable bg_card_rare
 drawable bg_main_menu_adventure
+drawable bg_option_box
 drawable bg_scroll
 drawable flamevillage
 drawable ic_card_decoration

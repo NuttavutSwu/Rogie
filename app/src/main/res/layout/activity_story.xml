@@ -82,20 +82,20 @@
                 android:visibility="gone"
                 android:background="@null" />
 
-            <!-- Using TextView for Continue to avoid any "Button Box" -->
+            <!-- Using TextView with the new box background -->
             <TextView
                 android:id="@+id/btnContinue"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:padding="12dp"
+                android:paddingHorizontal="32dp"
+                android:paddingVertical="12dp"
                 android:gravity="center"
                 android:text="เดินทางต่อ"
                 android:textColor="@color/scroll_ink"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:background="@drawable/ic_card_decoration"
-                android:backgroundTint="@color/scroll_stroke"
+                android:background="@drawable/bg_option_box"
                 android:visibility="gone" />
 
         </LinearLayout>

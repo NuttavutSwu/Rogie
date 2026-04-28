@@ -2,17 +2,21 @@ package com.rogie.threekingdoms.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
 import com.rogie.threekingdoms.R
 import com.rogie.threekingdoms.game.GameSession
 import com.rogie.threekingdoms.game.ShopLibrary
 import com.rogie.threekingdoms.model.StoryLibrary
 
+/**
+ * StoryActivity handles the narrative and event choices throughout the game.
+ * It dynamically generates choice boxes and handles transitions between story and combat.
+ */
 class StoryActivity : AppCompatActivity() {
 
     private var isFightTriggered = false
@@ -52,20 +56,24 @@ class StoryActivity : AppCompatActivity() {
         val btnContinue = findViewById<View>(R.id.btnContinue)
 
         event.options.forEach { option ->
-            // Use MaterialButton with TextButton style to remove the "Box" look
-            val button = MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
+            // Use TextView with bg_option_box for all player choices
+            val choiceBox = TextView(this).apply {
                 text = option.text
+                setTextColor(resources.getColor(R.color.scroll_ink, theme))
+                textSize = 18f
+                gravity = Gravity.CENTER
+                setBackgroundResource(R.drawable.bg_option_box)
+                
                 val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                params.setMargins(0, 4, 0, 4)
+                params.setMargins(0, 12, 0, 12)
                 layoutParams = params
                 
-                // Clean look: No background box, just text
-                setTextColor(getColor(R.color.scroll_ink))
-                textAllCaps = false
-                textSize = 18f
+                setPadding(32, 24, 32, 24)
+                isClickable = true
+                isFocusable = true
                 
                 setOnClickListener {
                     option.onChoice(GameSession.player)
@@ -87,7 +95,7 @@ class StoryActivity : AppCompatActivity() {
                     }
                 }
             }
-            container.addView(button)
+            container.addView(choiceBox)
         }
 
         btnContinue.setOnClickListener {
