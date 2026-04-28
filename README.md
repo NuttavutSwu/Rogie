@@ -21,7 +21,10 @@ A narrative-driven roguelike deck-building card game for Android.
 * `model/`: Game data (Card, StoryEvent).
 * `game/`: Core logic (GameSession, ShopLibrary).
 * `ui/`: Activities (Battle, Story, Selection).
-* 
+
+## 😈 wireframe
+* https://www.figma.com/design/1bonwYEtQA5oMNXCpE46ZU/Untitled?node-id=0-1&t=nHSwcHtiIFhFxcbq-1
+
 ## 🚀 Getting Started
 1. Clone the repository.
 2. Open in Android Studio (Ladybug or newer).
