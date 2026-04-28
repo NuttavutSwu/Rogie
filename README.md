@@ -24,6 +24,7 @@ A narrative-driven roguelike deck-building card game for Android.
 
 ## 😈 wireframe
 * https://www.figma.com/design/1bonwYEtQA5oMNXCpE46ZU/Untitled?node-id=0-1&t=nHSwcHtiIFhFxcbq-1
+* <wireframe.png>
 
 ## 🚀 Getting Started
 1. Clone the repository.
