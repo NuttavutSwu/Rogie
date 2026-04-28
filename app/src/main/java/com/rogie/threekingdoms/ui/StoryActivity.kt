@@ -15,12 +15,14 @@ import com.rogie.threekingdoms.model.StoryLibrary
 
 class StoryActivity : AppCompatActivity() {
 
+    private var isFightTriggered = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
 
         val event = when {
-            // 1. ถ้าเพิ่งปราบบอส -> เลือก Spare/Execute
+            // 1. ถ้าเพิ่งปราบบอส -> เลือกชะตากรรม (Spare/Execute)
             GameSession.lastBossDefeatedId != null -> {
                 val bossId = GameSession.lastBossDefeatedId!!
                 GameSession.lastBossDefeatedId = null
@@ -31,18 +33,18 @@ class StoryActivity : AppCompatActivity() {
                 GameSession.needsEpilogue = false
                 StoryLibrary.getChapterEnd(GameSession.currentChapter - 1)
             }
-            // 3. ถ้าเริ่มบทใหม่ -> บทนำ
+            // 3. ถ้าเริ่มบทใหม่ -> แสดงบทนำ (Intro)
             GameSession.isMainStoryEvent -> {
                 GameSession.isMainStoryEvent = false
                 ShopLibrary.resetChapterShop()
                 StoryLibrary.getChapterStart(GameSession.currentChapter)
             }
-            // 4. ร้านค้าจะโผล่มาช่วงกลางบท (ด่านที่ 4 ของ 8 ด่าน)
+            // 4. ร้านค้าสุ่มเกิดช่วงกลางบท
             !ShopLibrary.shopEventSpawned && (GameSession.encounterCount % 8 >= 4) -> {
                 ShopLibrary.shopEventSpawned = true
                 StoryLibrary.getShopStoryEvent()
             }
-            // 5. เหตุการณ์สุ่มปกติ
+            // 5. เหตุการณ์สุ่มหลากหลาย (ทหาร 70% / ทั่วไป 30%)
             else -> StoryLibrary.getRandomEvent()
         }
         
@@ -60,7 +62,6 @@ class StoryActivity : AppCompatActivity() {
                 setOnClickListener {
                     option.onChoice(GameSession.player)
                     
-                    // อัปเกรดด่านถ้าเลือกชะตากรรมบอสเสร็จแล้ว
                     if (option.isSpare || option.isExecute) {
                         GameSession.currentChapter++
                     }
@@ -72,6 +73,9 @@ class StoryActivity : AppCompatActivity() {
                     
                     if (option.triggerFight && option.forcedEnemy != null) {
                         GameSession.setForcedEnemy(option.forcedEnemy)
+                        isFightTriggered = true
+                    } else {
+                        isFightTriggered = false
                     }
                 }
             }
@@ -79,9 +83,17 @@ class StoryActivity : AppCompatActivity() {
         }
 
         btnContinue.setOnClickListener {
-            // เดินทางเข้าสู่หน้าต่อสู้หรือด่านถัดไป
-            startActivity(Intent(this, BattleActivity::class.java))
-            finish()
+            if (isFightTriggered) {
+                // ถ้ามีการสู้รบ ให้ไปหน้าต่อสู้
+                startActivity(Intent(this, BattleActivity::class.java))
+                finish()
+            } else {
+                // ถ้าเป็นเนื้อเรื่องต่อเนื่อง (เช่น เลือกชะตากรรมบอสเสร็จแล้วไป Epilogue)
+                // ให้ Refresh หน้า StoryActivity เพื่อแสดงเหตุการณ์ถัดไป
+                val intent = Intent(this, StoryActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }
