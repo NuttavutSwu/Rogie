@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-36:12
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:1-39:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\7f97d264f13aac2ced4fd6a3f60e52ba\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\8bf1fb8c4e94bafec786bf800ed52d6b\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\2513e894d292adb3f06ac91373929ba4\transformed\appcompat-resources-1.7.0\AndroidManifest.xml:2:1-7:12
@@ -62,8 +62,8 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\nutta\.gradle\caches\9.0-miles
 	xmlns:android
 		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:4:5-34:19
-INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:4:5-34:19
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:4:5-37:19
+INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:4:5-37:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\7f97d264f13aac2ced4fd6a3f60e52ba\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\7f97d264f13aac2ced4fd6a3f60e52ba\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\8bf1fb8c4e94bafec786bf800ed52d6b\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -126,22 +126,28 @@ ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xm
 		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:25:13-37
 	android:name
 		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:24:13-46
-activity#com.rogie.threekingdoms.ui.MainMenuActivity
-ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:26:9-33:20
+activity#com.rogie.threekingdoms.ui.StoryActivity
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:26:9-28:40
 	android:exported
-		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:28:13-36
+		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:28:13-37
 	android:name
-		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:27:13-48
+		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:27:13-45
+activity#com.rogie.threekingdoms.ui.MainMenuActivity
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:29:9-36:20
+	android:exported
+		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:31:13-36
+	android:name
+		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:30:13-48
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:29:13-32:29
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:32:13-35:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:30:17-69
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:33:17-69
 	android:name
-		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:30:25-66
+		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:33:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:31:17-77
+ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:34:17-77
 	android:name
-		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:31:27-74
+		ADDED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:34:27-74
 uses-sdk
 INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml

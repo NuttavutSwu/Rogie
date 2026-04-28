@@ -2,13 +2,17 @@ package com.rogie.threekingdoms.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.rogie.threekingdoms.R
 import com.rogie.threekingdoms.game.CardLibrary
 import com.rogie.threekingdoms.game.GameSession
 import com.rogie.threekingdoms.model.Card
+import com.rogie.threekingdoms.model.Relic
+import com.rogie.threekingdoms.model.EffectType
 import kotlin.random.Random
 
 class RewardActivity : AppCompatActivity() {
@@ -25,8 +29,14 @@ class RewardActivity : AppCompatActivity() {
         bindCardChoice(R.id.btnRewardCard3, R.id.tvRewardCard3, choices[2])
 
         findViewById<Button>(R.id.btnSkipReward).setOnClickListener {
-            applySecondaryReward()
-            moveToNextBattle()
+            val gotRelic = applySkipReward()
+            if (gotRelic != null) {
+                Toast.makeText(this, "ท่านได้รับวัตถุโบราณ: ${gotRelic.name}!", Toast.LENGTH_LONG).show()
+                // Small delay to let player see the toast before moving
+                it.postDelayed({ moveToRandomEncounter() }, 1000)
+            } else {
+                moveToRandomEncounter()
+            }
         }
     }
 
@@ -35,7 +45,7 @@ class RewardActivity : AppCompatActivity() {
         findViewById<Button>(buttonId).setOnClickListener {
             GameSession.addCard(card)
             applySecondaryReward()
-            moveToNextBattle()
+            moveToRandomEncounter()
         }
     }
 
@@ -43,17 +53,32 @@ class RewardActivity : AppCompatActivity() {
         if (Random.nextBoolean()) {
             GameSession.player.gold += 15
         } else {
-            GameSession.player.hp = minOf(GameSession.player.maxHp, GameSession.player.hp + 8)
-        }
-
-        // Optional roguelike relic. Keeps prototype expandable.
-        if (!GameSession.hasImperialSeal && Random.nextInt(100) < 20) {
-            GameSession.hasImperialSeal = true
+            GameSession.player.hp = minOf(GameSession.player.maxHp, GameSession.player.hp + 1)
         }
     }
 
-    private fun moveToNextBattle() {
-        startActivity(Intent(this, BattleActivity::class.java))
+    private fun applySkipReward(): Relic? {
+        // 20% chance to get a relic when skipping
+        if (Random.nextInt(100) < 20) {
+            val newRelic = Relic("RELIC_SKIP", "ตราประทับโบราณ", "เพิ่มพลังโจมตีถาวร", EffectType.BUFF_STRENGTH, 1)
+            
+            if (GameSession.player.relics.size < 3) {
+                GameSession.player.relics.add(newRelic)
+                return newRelic
+            } else {
+                // If full, we could trigger a replace UI, but for now just add if space exists
+                // Or inform the player it was full
+                return null 
+            }
+        }
+        
+        // Always give some gold if no relic
+        GameSession.player.gold += 20
+        return null
+    }
+
+    private fun moveToRandomEncounter() {
+        startActivity(Intent(this, StoryActivity::class.java))
         finish()
     }
 }

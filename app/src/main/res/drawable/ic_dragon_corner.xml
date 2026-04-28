@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Stylized Dragon head/tail for corners -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M2,2 L20,2 C15,2 12,5 12,10 L12,20 C12,15 9,12 4,12 L2,12 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M15,5 C17,5 18,7 18,9 C18,11 16,12 14,12 C12,12 11,10 11,8 C11,6 13,5 15,5 Z" />
+    <path
+        android:strokeColor="#FFA000"
+        android:strokeWidth="1"
+        android:pathData="M4,15 Q8,15 10,19 T16,23" />
+</vector>

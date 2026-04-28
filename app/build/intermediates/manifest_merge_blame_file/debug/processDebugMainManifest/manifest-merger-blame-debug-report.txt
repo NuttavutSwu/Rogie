@@ -20,7 +20,7 @@
 15-->[androidx.core:core:1.13.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\9c95af8a3d8e23b4851e56a1d877f495\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
 16
 17    <application
-17-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:4:5-34:19
+17-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:4:5-37:19
 18        android:allowBackup="true"
 18-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:5:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -69,88 +69,94 @@
 42            android:exported="false" />
 42-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:25:13-37
 43        <activity
-43-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:26:9-33:20
-44            android:name="com.rogie.threekingdoms.ui.MainMenuActivity"
-44-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:27:13-48
-45            android:exported="true" >
-45-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:28:13-36
-46            <intent-filter>
-46-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:29:13-32:29
-47                <action android:name="android.intent.action.MAIN" />
-47-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:30:17-69
-47-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:30:25-66
-48
-49                <category android:name="android.intent.category.LAUNCHER" />
-49-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:31:17-77
-49-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:31:27-74
-50            </intent-filter>
-51        </activity>
-52
-53        <provider
-53-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-54            android:name="androidx.startup.InitializationProvider"
-54-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-55            android:authorities="com.rogie.threekingdoms.androidx-startup"
-55-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-56            android:exported="false" >
-56-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-57            <meta-data
-57-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-58                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-58-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-59                android:value="androidx.startup" />
-59-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+43-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:26:9-28:40
+44            android:name="com.rogie.threekingdoms.ui.StoryActivity"
+44-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:27:13-45
+45            android:exported="false" />
+45-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:28:13-37
+46        <activity
+46-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:29:9-36:20
+47            android:name="com.rogie.threekingdoms.ui.MainMenuActivity"
+47-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:30:13-48
+48            android:exported="true" >
+48-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:31:13-36
+49            <intent-filter>
+49-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:32:13-35:29
+50                <action android:name="android.intent.action.MAIN" />
+50-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:33:17-69
+50-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:33:25-66
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:34:17-77
+52-->C:\Users\nutta\Documents\GitHub\Rogie\app\src\main\AndroidManifest.xml:34:27-74
+53            </intent-filter>
+54        </activity>
+55
+56        <provider
+56-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+57            android:name="androidx.startup.InitializationProvider"
+57-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+58            android:authorities="com.rogie.threekingdoms.androidx-startup"
+58-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+59            android:exported="false" >
+59-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
 60            <meta-data
-60-->[androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\a40966a756768de70e8852c7af00c53e\transformed\lifecycle-process-2.8.4\AndroidManifest.xml:29:13-31:52
-61                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-61-->[androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\a40966a756768de70e8852c7af00c53e\transformed\lifecycle-process-2.8.4\AndroidManifest.xml:30:17-78
+60-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+61                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+61-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
 62                android:value="androidx.startup" />
-62-->[androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\a40966a756768de70e8852c7af00c53e\transformed\lifecycle-process-2.8.4\AndroidManifest.xml:31:17-49
+62-->[androidx.emoji2:emoji2:1.3.0] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ebd423f1d880bd449ad65cf82e576d03\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
 63            <meta-data
-63-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
-64                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-64-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+63-->[androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\a40966a756768de70e8852c7af00c53e\transformed\lifecycle-process-2.8.4\AndroidManifest.xml:29:13-31:52
+64                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+64-->[androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\a40966a756768de70e8852c7af00c53e\transformed\lifecycle-process-2.8.4\AndroidManifest.xml:30:17-78
 65                android:value="androidx.startup" />
-65-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
-66        </provider>
-67
-68        <receiver
-68-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
-69            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-69-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
-70            android:directBootAware="false"
-70-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
-71            android:enabled="true"
-71-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
-72            android:exported="true"
-72-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
-73            android:permission="android.permission.DUMP" >
-73-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
-74            <intent-filter>
-74-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
-75                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-75-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
-75-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
-76            </intent-filter>
+65-->[androidx.lifecycle:lifecycle-process:2.8.4] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\a40966a756768de70e8852c7af00c53e\transformed\lifecycle-process-2.8.4\AndroidManifest.xml:31:17-49
+66            <meta-data
+66-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+67                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+67-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+68                android:value="androidx.startup" />
+68-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+69        </provider>
+70
+71        <receiver
+71-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+72            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+72-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+73            android:directBootAware="false"
+73-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+74            android:enabled="true"
+74-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+75            android:exported="true"
+75-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+76            android:permission="android.permission.DUMP" >
+76-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
 77            <intent-filter>
-77-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
-78                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-78-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
-78-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+77-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+78                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+78-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+78-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
 79            </intent-filter>
 80            <intent-filter>
-80-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
-81                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-81-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
-81-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+80-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+81                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+81-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+81-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
 82            </intent-filter>
 83            <intent-filter>
-83-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
-84                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-84-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
-84-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+84                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+84-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+84-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
 85            </intent-filter>
-86        </receiver>
-87    </application>
-88
-89</manifest>
+86            <intent-filter>
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+87                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+87-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+87-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\nutta\.gradle\caches\9.0-milestone-1\transforms\ca41c0be720d42967e8a8d14edc0d9b2\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+88            </intent-filter>
+89        </receiver>
+90    </application>
+91
+92</manifest>

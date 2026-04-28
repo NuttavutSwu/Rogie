@@ -6,6 +6,8 @@ object MetaProgressionManager {
     private const val PREFS = "three_kingdoms_meta"
     private const val KEY_POINTS = "skill_points"
     private const val KEY_UNLOCKS = "unlocks"
+    private const val KEY_DEATH_COUNT = "death_count"
+    private const val KEY_BOSS_DEFEAT_PREFIX = "boss_defeat_"
 
     private val defaultUnlocked = setOf(
         CharacterId.GUAN_YU.name,
@@ -23,6 +25,28 @@ object MetaProgressionManager {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val now = prefs.getInt(KEY_POINTS, 0)
         prefs.edit().putInt(KEY_POINTS, now + amount).apply()
+    }
+
+    fun getDeathCount(context: Context): Int {
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        return prefs.getInt(KEY_DEATH_COUNT, 0)
+    }
+
+    fun incrementDeathCount(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        val current = prefs.getInt(KEY_DEATH_COUNT, 0)
+        prefs.edit().putInt(KEY_DEATH_COUNT, current + 1).apply()
+    }
+
+    fun recordBossDefeat(context: Context, bossId: String) {
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        val current = prefs.getInt(KEY_BOSS_DEFEAT_PREFIX + bossId, 0)
+        prefs.edit().putInt(KEY_BOSS_DEFEAT_PREFIX + bossId, current + 1).apply()
+    }
+
+    fun getBossDefeatCount(context: Context, bossId: String): Int {
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        return prefs.getInt(KEY_BOSS_DEFEAT_PREFIX + bossId, 0)
     }
 
     fun unlockedCharacters(context: Context): List<CharacterId> {
@@ -80,12 +104,6 @@ object MetaProgressionManager {
             .putBoolean(talentKey(character, nodeId), true)
             .apply()
         return true
-    }
-
-    @Deprecated("Use hasTalentUnlocked")
-    fun getSkillLevel(context: Context, character: CharacterId, nodeId: String): Int {
-        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-        return if (prefs.getBoolean(talentKey(character, nodeId), false)) 1 else 0
     }
 
     private fun talentKey(character: CharacterId, nodeId: String): String {

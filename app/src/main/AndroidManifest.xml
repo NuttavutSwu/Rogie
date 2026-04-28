@@ -24,6 +24,9 @@
             android:name=".ui.BattleActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.StoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainMenuActivity"
             android:exported="true">
             <intent-filter>

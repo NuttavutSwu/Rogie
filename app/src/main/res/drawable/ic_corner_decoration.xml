@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="40"
+    android:viewportHeight="40">
+    <!-- Traditional Chinese Cloud/Swirl Corner Pattern -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#3E2723"
+        android:strokeWidth="1.5"
+        android:pathData="M2,20 L2,8 C2,4.68 4.68,2 8,2 L20,2 M5,12 C5,10 7,7 12,7 M8,5 C6,5 5,7 5,10" />
+</vector>

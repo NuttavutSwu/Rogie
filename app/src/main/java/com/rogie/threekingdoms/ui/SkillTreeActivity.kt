@@ -95,6 +95,7 @@ class SkillTreeActivity : AppCompatActivity() {
                 when (node.rarity) {
                     TalentRarity.COMMON -> R.color.talent_common
                     TalentRarity.RARE -> R.color.talent_rare
+                    TalentRarity.EPIC -> R.color.talent_epic
                     TalentRarity.LEGENDARY -> R.color.talent_legendary
                 }
             )
@@ -131,6 +132,7 @@ class SkillTreeActivity : AppCompatActivity() {
         val toneType = when (rarity) {
             TalentRarity.COMMON -> ToneGenerator.TONE_PROP_BEEP
             TalentRarity.RARE -> ToneGenerator.TONE_PROP_ACK
+            TalentRarity.EPIC -> ToneGenerator.TONE_PROP_PROMPT
             TalentRarity.LEGENDARY -> ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD
         }
         toneGenerator.startTone(toneType, 220)

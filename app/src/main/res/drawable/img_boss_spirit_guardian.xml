@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <path android:fillColor="#11FFFFFF" android:pathData="M100,150m-80,0a80,80 0,1 1,160 0a80,80 0,1 1,-160 0" />
+    <!-- Ethereal Guardian Body -->
+    <path android:fillColor="#B2EBF2" android:pathData="M70,100 L130,100 L150,280 L50,280 Z" android:alpha="0.6" />
+    <path android:fillColor="#E0F7FA" android:pathData="M85,40 L115,40 L125,95 L75,95 Z" android:alpha="0.8" />
+    <!-- Staff of Faith -->
+    <path android:strokeColor="#FFD700" android:strokeWidth="4" android:pathData="M160,50 L160,280" />
+    <path android:fillColor="#FFD700" android:pathData="M150,40 L170,40 L160,20 Z" />
+</vector>

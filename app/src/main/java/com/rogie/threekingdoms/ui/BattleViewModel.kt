@@ -49,7 +49,15 @@ class BattleViewModel : ViewModel() {
     }
 
     fun endTurn() {
-        val result = battleManager.endPlayerTurn()
+        val result = endTurnString()
+        processEndTurnResult(result)
+    }
+
+    fun endTurnString(): String {
+        return battleManager.endPlayerTurn()
+    }
+
+    fun processEndTurnResult(result: String) {
         if (enemy.hp <= 0) {
             GameSession.player.gold += 20 + GameSession.bonusGoldPerVictory
             GameSession.onEnemyDefeated(enemy)
@@ -64,12 +72,17 @@ class BattleViewModel : ViewModel() {
         _hand.value = deckManager.hand.toList()
     }
 
-    fun playerHpText(): String = "${GameSession.player.hp}/${GameSession.player.maxHp}"
-    fun playerNumericHpText(): String = "${GameSession.player.hp}/${GameSession.player.maxHp}"
+    fun playerHpText(): String {
+        val p = GameSession.player
+        return if (p.block > 0) "${p.hp}/${p.maxHp} (+${p.block} Shield)" else "${p.hp}/${p.maxHp}"
+    }
+    
+    fun enemyHpText(): String {
+        return if (enemy.block > 0) "${enemy.hp}/${enemy.maxHp} (+${enemy.block} Shield)" else "${enemy.hp}/${enemy.maxHp}"
+    }
+
     fun playerEnergyText(): String = GameSession.player.energy.toString()
     fun playerGoldText(): String = GameSession.player.gold.toString()
-    fun enemyHpText(): String = "${enemy.hp}/${enemy.maxHp}"
-    fun enemyNumericHpText(): String = "${enemy.hp}/${enemy.maxHp}"
     fun enemyNameText(): String = enemy.name
     fun characterStatsText(): String {
         val c = GameSession.character

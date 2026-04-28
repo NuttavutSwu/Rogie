@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="300dp"
+    android:viewportWidth="200"
+    android:viewportHeight="300">
+    <path
+        android:fillColor="#11000000"
+        android:pathData="M100,280m-60,0a60,20 0,1 1,120 0a60,20 0,1 1,-120 0" />
+    <!-- Imperial Robes -->
+    <path
+        android:fillColor="#4527A0"
+        android:pathData="M65,90 L135,90 L155,280 L45,280 Z" />
+    <!-- Gold embroidery -->
+    <path
+        android:fillColor="#FFD600"
+        android:pathData="M90,90 L110,90 L115,280 L85,280 Z" />
+    <!-- Face -->
+    <path
+        android:fillColor="#FFE0B2"
+        android:pathData="M85,35 L115,35 L120,85 L80,85 Z" />
+    <!-- Crown/Hat -->
+    <path
+        android:fillColor="#311B92"
+        android:pathData="M80,40 L120,40 L125,15 L75,15 Z" />
+    <!-- Cape -->
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M65,95 L40,270 L55,270 L70,95 Z" />
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M135,95 L160,270 L145,270 L130,95 Z" />
+</vector>
